@@ -5,9 +5,7 @@ namespace BusCompany.DAO
 {
     public class ClassDAO
     {
-        private const string connectionString = @"Initial Catalog = BusCompany;" +
-        @"Data Source=LOCALHOST\SQLEXPRESS;" + @"Integrated Security=True;" +
-        @"Pooling=False";
+        private string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
         protected static readonly ILog log = LogManager.GetLogger(typeof(ClassDAO));
         protected SqlConnection Connection { get; set; }

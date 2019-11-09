@@ -41,7 +41,10 @@ namespace BusCompany.Controllers
         // GET: Hult/Delete/5
         public ActionResult Delete(int id)
         {
-            return View(hultDAO.GetById(id));
+            List<Hult> hult = hultDAO.GetAllHult();
+            int x = 0;
+            for (int i = 0; i < hult.Count; i++) if (id == hult[i].Id) { x = i; break; }
+            return View(hult[x]);
 
         }
 
@@ -61,29 +64,5 @@ namespace BusCompany.Controllers
             }
 
         }
-
-        // GET: Home/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View(hultDAO.GetById(id));
-        }
-
-        // POST: Home/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, Hult hult)
-        {
-            try
-            {
-                if (hultDAO.UpdateHult(id, hult))
-                    return RedirectToAction("Index");
-                else return View("Edit");
-
-            }
-            catch
-            {
-                return View("Edit");
-            }
-        }
-
     }
 }

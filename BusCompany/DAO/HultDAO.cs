@@ -11,6 +11,7 @@ namespace BusCompany.DAO
 
         public List<Hult> GetAllHult()
         {
+
             Connect();
             log4net.Config.DOMConfigurator.Configure();
             log.Info("Вызывается метод который возвращает список всех остановок.");
@@ -46,6 +47,7 @@ namespace BusCompany.DAO
 
         public bool AddHult(Hult hult)
         {
+
             bool result = true;
             Connect();
             log4net.Config.DOMConfigurator.Configure();
@@ -94,50 +96,6 @@ namespace BusCompany.DAO
                 Disconnect();
             }
             return result;
-        }
-
-        public bool UpdateHult(int id, Hult hult)
-        {
-            bool result = true;
-            Connect();
-
-            try
-            {
-                string sql = "UPDATE Hult SET hultName=@hultName WHERE id=" + id;
-                SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
-                cmd_SQL.Parameters.AddWithValue("@hultName", hult.HultName);               
-                cmd_SQL.ExecuteNonQuery();
-            }
-            catch (Exception)
-            {
-                result = false;
-            }
-            finally
-            {
-                Disconnect();
-            }
-            return result;
-
-        }
-
-        public Hult GetById(int id)
-        {
-            Connect(); Hult hult = new Hult();
-            string query = "SELECT*FROM Hult where id=" + id;
-            SqlCommand commandRead = new SqlCommand(query, Connection);
-            SqlDataReader reader = commandRead.ExecuteReader();
-            if (reader.HasRows)
-            {
-                while (reader.Read())
-                {
-                    hult.Id = Convert.ToInt32(reader["id"]);
-                    hult.HultName = Convert.ToString(reader["hultName"]);
-                }
-            }
-            reader.Close();
-            Disconnect();
-
-            return hult;
         }
 
     }

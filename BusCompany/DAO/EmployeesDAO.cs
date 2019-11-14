@@ -38,35 +38,6 @@ namespace BusCompany.DAO
             return employees;
         }
 
-        public List<Employees> GetAllEmployeesWho(string position)
-        {
-            Connect();
-            List<Employees> employees = new List<Employees>();
-            string query = "SELECT*FROM Employees where Position= '" + position +"'";
-            SqlCommand commandRead = new SqlCommand(query, Connection);
-            SqlDataReader reader = commandRead.ExecuteReader();
-            if (reader.HasRows)
-            {
-                while (reader.Read())
-                {
-                    Employees empl = new Employees();
-                    empl.PersonnelNumber = Convert.ToInt32(reader["personnelNumber"]);
-                    empl.LastName = Convert.ToString(reader["LastName"]);
-                    empl.FirstName = Convert.ToString(reader["FirstName"]);
-                    empl.MiddleName = Convert.ToString(reader["MiddleName"]);
-                    empl.DateOfBirth = Convert.ToString(reader["DateOfBirth"]);
-                    empl.Experience = Convert.ToInt32(reader["Experience"]); ;
-                    empl.Salary = Convert.ToDecimal(reader["Salary"]);
-                    empl.Position = Convert.ToString(reader["Position"]);
-                    employees.Add(empl);
-                }
-            }
-            reader.Close();
-            Disconnect();
-
-            return employees;
-        }
-
         public Employees GetById(int id)
         {
             Connect(); Employees empl = new Employees();

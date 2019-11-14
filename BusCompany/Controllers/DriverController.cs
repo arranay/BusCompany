@@ -14,7 +14,7 @@ namespace BusCompany.Controllers
         // GET: Driver
         public ActionResult Index()
         {
-            return View(driverDAO.GetAllEmployeesWho("водитель            "));
+            return View(driverDAO.GetAllDriver());
         }
 
         // GET: Driver/Details/5

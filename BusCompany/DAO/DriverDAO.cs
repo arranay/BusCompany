@@ -88,5 +88,38 @@ namespace BusCompany.DAO
             }
             return result;
         }
+
+        public bool EditDriver(int id, Driver driver)
+        {
+            Employees employees = new Employees(driver.LastName, driver.FirstName, driver.MiddleName,
+                                                                        driver.Experience, driver.Salary);
+            EmployeesDAO employeesDAO = new EmployeesDAO();
+            bool result = false;
+
+            if (employeesDAO.EditEmployees(id, employees))
+            {
+                result = true;
+                Connect();
+                try
+                {
+                    string sql = "UPDATE Driver " +
+                        "SET categories=@categories, rightsDate=@rightsDate WHERE id=" + id;
+                    SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                    cmd_SQL.Parameters.AddWithValue("@categories", driver.Categories);
+                    cmd_SQL.Parameters.AddWithValue("@rightsDate", driver.RightsDate);
+                    cmd_SQL.ExecuteNonQuery();
+                }
+                catch (Exception)
+                {
+                    result = false;
+                }
+                finally
+                {
+                    Disconnect();
+                }
+            }
+            return result;
+        }
+
     }
 }

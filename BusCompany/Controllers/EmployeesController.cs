@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using BusCompany.DAO;
 using BusCompany.Models;
 
@@ -74,24 +70,69 @@ namespace BusCompany.Controllers
         //*************************Edit***************************************
 
         // GET: Employees/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult EditEmployees(int id)
         {
             return View(employeesDAO.GetById(id));
         }
 
         // POST: Employees/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, Employees empl)
+        public ActionResult EditEmployees(int id,Employees empl)
         {
             try
             {
                 if (employeesDAO.EditEmployees(id, empl))
                     return RedirectToAction("Index");
-                else return View("Edit");
+                else return View("EditEmployees");
             }
             catch
             {
-                return View("Edit");
+                return View("EditEmployees");
+            }
+        }
+
+        
+        // GET: Employees/Edit/5
+        public ActionResult EditDriver(int id)
+        {
+            return View(driverDAO.GetById(id));
+        }
+
+        // POST: Employees/Edit/5
+        [HttpPost]
+        public ActionResult EditDriver(int id, Driver driver)
+        {
+            try
+            {
+                if (driverDAO.EditDriver(id, driver))
+                    return RedirectToAction("Index");
+                else return View("EditDriver");
+            }
+            catch
+            {
+                return View("EditDriver");
+            }
+        }
+
+        // GET: Employees/Edit/5
+        public ActionResult EditMechanic(int id)
+        {
+            return View(mechanicDAO.GetById(id));
+        }
+
+        // POST: Employees/Edit/5
+        [HttpPost]
+        public ActionResult EditMechanic(int id, Mechanic mechanic)
+        {
+            try
+            {
+                if (mechanicDAO.EditMechanic(id, mechanic))
+                    return RedirectToAction("Index");
+                else return View("EditMechanic");
+            }
+            catch
+            {
+                return View("EditMechanic");
             }
         }
 
@@ -111,11 +152,11 @@ namespace BusCompany.Controllers
             {
                 if (employeesDAO.DeleteEmployees(id)) 
                     return RedirectToAction("Index");
-                else return View("Delete");
+                else return View("DeleteEmployees");
             }
             catch
             {
-                return View("Delete");
+                return View("DeleteEmployeese");
             }
         }
 
@@ -134,11 +175,11 @@ namespace BusCompany.Controllers
             {
                 if (mechanicDAO.DeleteMechanic(id))
                     return RedirectToAction("Index");
-                else return View("Delete");
+                else return View("DeleteMechanic");
             }
             catch
             {
-                return View("Delete");
+                return View("DeleteMechanic");
             }
         }
 
@@ -156,11 +197,11 @@ namespace BusCompany.Controllers
             {
                 if (conductorDAO.DeleteConductor(id))
                     return RedirectToAction("Index");
-                else return View("Delete");
+                else return View("DeleteConductor");
             }
             catch
             {
-                return View("Delete");
+                return View("DeleteConductor");
             }
         }
 
@@ -178,11 +219,11 @@ namespace BusCompany.Controllers
             {
                 if (driverDAO.DeleteDriver(id))
                     return RedirectToAction("Index");
-                else return View("Delete");
+                else return View(" DeleteDriver");
             }
             catch
             {
-                return View("Delete");
+                return View(" DeleteDriver");
             }
         }
     }

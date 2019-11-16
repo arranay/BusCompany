@@ -185,7 +185,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\DriverController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HultController.cs" />
@@ -271,10 +270,7 @@
     <Content Include="Views\Hult\Delete.cshtml" />
     <Content Include="Views\Hult\Edit.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
-    <Content Include="Views\Employees\Details.cshtml" />
     <Content Include="Views\Employees\Create.cshtml" />
-    <Content Include="Views\Employees\Edit.cshtml" />
-    <Content Include="Views\Employees\Delete.cshtml" />
     <Content Include="Views\Driver\Index.cshtml" />
     <Content Include="Views\Driver\Details.cshtml" />
     <Content Include="Views\Employees\DetailsEmployees.cshtml" />
@@ -285,6 +281,9 @@
     <Content Include="Views\Employees\DeleteMechanic.cshtml" />
     <Content Include="Views\Employees\DeleteDriver.cshtml" />
     <Content Include="Views\Employees\DeleteConductor.cshtml" />
+    <Content Include="Views\Employees\EditEmployees.cshtml" />
+    <Content Include="Views\Employees\EditDriver.cshtml" />
+    <Content Include="Views\Employees\EditMechanic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

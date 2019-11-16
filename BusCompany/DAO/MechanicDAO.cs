@@ -54,5 +54,36 @@ namespace BusCompany.DAO
             }
             return result;
         }
+
+        public bool EditMechanic(int id, Mechanic mechanic)
+        {
+            Employees employees = new Employees(mechanic.LastName, mechanic.FirstName, mechanic.MiddleName,
+                                                                        mechanic.Experience, mechanic.Salary);
+            EmployeesDAO employeesDAO = new EmployeesDAO();
+            bool result = false;
+
+            if (employeesDAO.EditEmployees(id, employees))
+            {
+                result = true;
+                Connect();
+                try
+                {
+                    string sql = "UPDATE mechanic " +
+                        "SET qualification=@qualification WHERE id=" + id;
+                    SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                    cmd_SQL.Parameters.AddWithValue("@qualification", mechanic.Qualification);
+                    cmd_SQL.ExecuteNonQuery();
+                }
+                catch (Exception)
+                {
+                    result = false;
+                }
+                finally
+                {
+                    Disconnect();
+                }
+            }
+            return result;
+        }
     }
 }

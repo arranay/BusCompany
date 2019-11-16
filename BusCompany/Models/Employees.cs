@@ -26,5 +26,19 @@ namespace BusCompany.Models
         public int Experience { get => experience; set => experience = value; }
         public decimal Salary { get => salary; set => salary = value; }
         public string Position { get => position; set => position = value; }
+
+        public Employees(string lName, string fName, string mName, int exp, decimal sal)
+        {
+            lastName = lName;
+            firstName = fName;
+            middleName = mName;
+            experience = exp;
+            salary = sal;
+        }
+
+        public Employees()
+        {
+
+        }
     }
 }

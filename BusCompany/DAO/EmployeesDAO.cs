@@ -97,27 +97,27 @@ namespace BusCompany.DAO
 
         public bool EditEmployees(int id, Employees employees)
         {
+            log4net.Config.DOMConfigurator.Configure();
+            log.Info("Вызывается метод который изменяет данные о работнике.");
             bool result = true;
             Connect();
 
             try
             {
                 string sql = "UPDATE Employees " +
-                    "SET LastName=@LastName, FirstName=@FirstName, MiddleName=@MiddleName,DateOfBirth=@DateOfBirth," +
-                    "Experience=@Experience,Salary=@Salary,Position=@Position WHERE personnelNumber=" + id;
+                    "SET LastName=@LastName, FirstName=@FirstName, MiddleName=@MiddleName," +
+                    "Experience=@Experience,Salary=@Salary WHERE personnelNumber=" + id;
                 SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
                 cmd_SQL.Parameters.AddWithValue("@LastName", employees.LastName);
                 cmd_SQL.Parameters.AddWithValue("@FirstName", employees.FirstName);
                 cmd_SQL.Parameters.AddWithValue("@MiddleName", employees.MiddleName);
-                cmd_SQL.Parameters.AddWithValue("@DateOfBirth", employees.DateOfBirth);
                 cmd_SQL.Parameters.AddWithValue("@Experience", employees.Experience);
                 cmd_SQL.Parameters.AddWithValue("@Salary", employees.Salary);
-                cmd_SQL.Parameters.AddWithValue("@Position", employees.Position);
                 cmd_SQL.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (SqlException e)
             {
-                result = false;
+                log.Error("ERROR" + e.Message);
             }
             finally
             {

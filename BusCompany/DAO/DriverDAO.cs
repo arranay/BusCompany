@@ -67,5 +67,26 @@ namespace BusCompany.DAO
 
             return driver;
         }
+
+        public bool DeleteDriver(int id)
+        {
+            bool result = true;
+            Connect();
+            try
+            {
+                string sql = "DELETE FROM Driver WHERE id =" + id + "; DELETE FROM Employees WHERE personnelNumber =" + id;
+                SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+            return result;
+        }
     }
 }

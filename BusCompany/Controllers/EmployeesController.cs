@@ -21,6 +21,8 @@ namespace BusCompany.Controllers
             return View(employeesDAO.GetAllEmployees());
         }
 
+        //*************************Details***************************************
+
         // GET: Employees/Details/5
         public ActionResult DetailsEmployees(int id)
         {
@@ -45,7 +47,7 @@ namespace BusCompany.Controllers
             return View(conductorDAO.GetById(id));
         }
 
-
+        //*************************Create***************************************
 
         // GET: Employees/Create
         public ActionResult Create()
@@ -69,6 +71,8 @@ namespace BusCompany.Controllers
             }
         }
 
+        //*************************Edit***************************************
+
         // GET: Employees/Edit/5
         public ActionResult Edit(int id)
         {
@@ -91,19 +95,88 @@ namespace BusCompany.Controllers
             }
         }
 
+        //*************************Delete***************************************
+
         // GET: Employees/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DeleteEmployees(int id)
         {
             return View(employeesDAO.GetById(id));
         }
 
         // POST: Employees/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult DeleteEmployees(int id, FormCollection collection)
         {
             try
             {
                 if (employeesDAO.DeleteEmployees(id)) 
+                    return RedirectToAction("Index");
+                else return View("Delete");
+            }
+            catch
+            {
+                return View("Delete");
+            }
+        }
+
+
+        // GET: Employees/Delete/5
+        public ActionResult DeleteMechanic(int id)
+        {
+            return View(mechanicDAO.GetById(id));
+        }
+
+        // POST: Employees/Delete/5
+        [HttpPost]
+        public ActionResult DeleteMechanic(int id, FormCollection collection)
+        {
+            try
+            {
+                if (mechanicDAO.DeleteMechanic(id))
+                    return RedirectToAction("Index");
+                else return View("Delete");
+            }
+            catch
+            {
+                return View("Delete");
+            }
+        }
+
+        // GET: Employees/Delete/5
+        public ActionResult DeleteConductor(int id)
+        {
+            return View(conductorDAO.GetById(id));
+        }
+
+        // POST: Employees/Delete/5
+        [HttpPost]
+        public ActionResult DeleteConductor(int id, FormCollection collection)
+        {
+            try
+            {
+                if (conductorDAO.DeleteConductor(id))
+                    return RedirectToAction("Index");
+                else return View("Delete");
+            }
+            catch
+            {
+                return View("Delete");
+            }
+        }
+
+        // GET: Employees/Delete/5
+        public ActionResult DeleteDriver(int id)
+        {
+            return View(driverDAO.GetById(id));
+        }
+
+        // POST: Employees/Delete/5
+        [HttpPost]
+        public ActionResult DeleteDriver(int id, FormCollection collection)
+        {
+            try
+            {
+                if (driverDAO.DeleteDriver(id))
                     return RedirectToAction("Index");
                 else return View("Delete");
             }

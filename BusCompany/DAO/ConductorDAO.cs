@@ -35,5 +35,26 @@ namespace BusCompany.DAO
 
             return conductor;
         }
+
+        public bool DeleteConductor(int id)
+        {
+            bool result = true;
+            Connect();
+            try
+            {
+                string sql = "DELETE FROM Conductor WHERE id =" + id + "; DELETE FROM Employees WHERE personnelNumber =" + id;
+                SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+            return result;
+        }
     }
 }

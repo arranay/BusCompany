@@ -32,6 +32,27 @@ namespace BusCompany.DAO
             Disconnect();
 
             return mechanic;
-        }   
+        }
+
+        public bool DeleteMechanic(int id)
+        {
+            bool result = true;
+            Connect();
+            try
+            {
+                string sql = "DELETE FROM Mechanic WHERE id =" + id+ "; DELETE FROM Employees WHERE personnelNumber =" + id;
+                SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+            return result;
+        }
     }
 }

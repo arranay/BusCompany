@@ -60,15 +60,23 @@
             </td>
             <td>
                 @Html.ActionLink("Изменить", "Edit", new { id = item.PersonnelNumber }) |
+
+
                 @switch (item.Position)
-                {
+                 {
                     case "водитель            ":@Html.ActionLink("Информация", "DetailsDriver", new { id = item.PersonnelNumber }); break;
                     case "кондуктор           ": @Html.ActionLink("Информация", "DetailsConductor", new { id = item.PersonnelNumber }); break;
                     case "механик             ": @Html.ActionLink("Информация", "DetailsMechanic", new { id = item.PersonnelNumber }); break;
                     default: @Html.ActionLink("Информация", "DetailsEmployees", new { id = item.PersonnelNumber }); break;
-}
-                |
-                @Html.ActionLink("Удалить", "Delete", new { id = item.PersonnelNumber })
+                 }|
+
+                @switch (item.Position)
+                 {
+                    case "водитель            ":@Html.ActionLink("Удалить", "DeleteDriver", new { id = item.PersonnelNumber })break;
+                    case "кондуктор           ": @Html.ActionLink("Удалить", "DeleteConductor", new { id = item.PersonnelNumber })break;
+                    case "механик             ": @Html.ActionLink("Удалить", "DeleteMechanic", new { id = item.PersonnelNumber })break;
+                    default: @Html.ActionLink("Удалить", "DeleteEmployees", new { id = item.PersonnelNumber })break;
+                 }
             </td>
         </tr>
     }

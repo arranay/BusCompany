@@ -23,12 +23,12 @@ namespace BusCompany.DAO
                     dr.LastName = Convert.ToString(reader["LastName"]);
                     dr.FirstName = Convert.ToString(reader["FirstName"]);
                     dr.MiddleName = Convert.ToString(reader["MiddleName"]);
-                    dr.DateOfBirth = Convert.ToString(reader["DateOfBirth"]);
+                    dr.DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"]);
                     dr.Experience = Convert.ToInt32(reader["Experience"]); ;
                     dr.Salary = Convert.ToDecimal(reader["Salary"]);
                     dr.Position = Convert.ToString(reader["Position"]);
                     dr.Categories = Convert.ToString(reader["categories"]);
-                    dr.RightsDate = Convert.ToString(reader["RightsDate"]);
+                    dr.RightsDate = Convert.ToDateTime(reader["RightsDate"]);
                     dr.OnRoute = Convert.ToBoolean(reader["OnRoute"]);
                     driver.Add(dr);
                 }

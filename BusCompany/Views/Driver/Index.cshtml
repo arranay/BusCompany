@@ -4,39 +4,37 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
+    <h2>Водители</h2>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.PersonnelNumber)
+            Табельный номер
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastName)
+            Фамилия
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            Имя
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MiddleName)
+            Отчество
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DateOfBirth)
+            Дата рождения
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Experience)
+            Опыт работы
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Salary)
+            Зарплата
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Position)
+            Категария водительских прав
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Categories)
+            Дата получения прав
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RightsDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OnRoute)
+            Прикрепление к маршруту
         </th>
         <th></th>
     </tr>
@@ -65,9 +63,6 @@
             @Html.DisplayFor(modelItem => item.Salary)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Position)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Categories)
         </td>
         <td>
@@ -75,6 +70,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.OnRoute)
+        </td>
+        <td>
+            @Html.Label(item.RightsDate.ToShortDateString())
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

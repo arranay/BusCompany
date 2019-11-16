@@ -25,7 +25,7 @@ namespace BusCompany.DAO
                     empl.LastName = Convert.ToString(reader["LastName"]);
                     empl.FirstName = Convert.ToString(reader["FirstName"]);
                     empl.MiddleName = Convert.ToString(reader["MiddleName"]);
-                    empl.DateOfBirth = Convert.ToString(reader["DateOfBirth"]);
+                    empl.DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"]);
                     empl.Experience = Convert.ToInt32(reader["Experience"]); ;
                     empl.Salary = Convert.ToDecimal(reader["Salary"]);
                     empl.Position = Convert.ToString(reader["Position"]);
@@ -52,7 +52,7 @@ namespace BusCompany.DAO
                     empl.LastName = Convert.ToString(reader["LastName"]);
                     empl.FirstName = Convert.ToString(reader["FirstName"]);
                     empl.MiddleName = Convert.ToString(reader["MiddleName"]);
-                    empl.DateOfBirth = Convert.ToString(reader["DateOfBirth"]);
+                    empl.DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"]);
                     empl.Experience = Convert.ToInt32(reader["Experience"]); ;
                     empl.Salary = Convert.ToDecimal(reader["Salary"]);
                     empl.Position = Convert.ToString(reader["Position"]);

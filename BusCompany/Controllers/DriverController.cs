@@ -20,7 +20,7 @@ namespace BusCompany.Controllers
         // GET: Driver/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(driverDAO.GetById(id));
         }
 
         // GET: Driver/Create

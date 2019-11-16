@@ -190,6 +190,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HultController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="DAO\ConductorDAO.cs" />
+    <Compile Include="DAO\MechanicDAO.cs" />
     <Compile Include="DAO\ClassDAO.cs" />
     <Compile Include="DAO\DriverDAO.cs" />
     <Compile Include="DAO\EmployeesDAO.cs" />
@@ -274,6 +276,11 @@
     <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Employees\Delete.cshtml" />
     <Content Include="Views\Driver\Index.cshtml" />
+    <Content Include="Views\Driver\Details.cshtml" />
+    <Content Include="Views\Employees\DetailsEmployees.cshtml" />
+    <Content Include="Views\Employees\DetailsDriver.cshtml" />
+    <Content Include="Views\Employees\DetailsMechanic.cshtml" />
+    <Content Include="Views\Employees\DetailsConductor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

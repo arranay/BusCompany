@@ -1,13 +1,13 @@
-﻿@model BusCompany.Models.Employees
+﻿@model BusCompany.Models.Mechanic
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "DetailsMechanic";
 }
 
-<h2>Details</h2>
+<h2>DetailsMechanic</h2>
 
 <div>
-    <h4>Employees</h4>
+    <h4>Mechanic</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -72,6 +72,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.Position)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Qualification)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Qualification)
         </dd>
 
     </dl>

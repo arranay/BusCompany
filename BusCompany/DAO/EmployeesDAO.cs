@@ -7,7 +7,7 @@ using BusCompany.Models;
 
 namespace BusCompany.DAO
 {
-    public class EmployeesDAO: ClassDAO
+    public class EmployeesDAO : ClassDAO
     {
         public List<Employees> GetAllEmployees()
         {

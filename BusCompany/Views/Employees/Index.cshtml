@@ -1,68 +1,79 @@
 ﻿@model IEnumerable<BusCompany.Models.Employees>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<br><br>
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.PersonnelNumber)
+            Табельный номер
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastName)
+            Фамилия
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            Имя
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MiddleName)
+            Отчество
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DateOfBirth)
+            Дата рождения
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Experience)
+            Стаж работы
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Salary)
+            Заработная плата
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Position)
+            Должность
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PersonnelNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MiddleName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateOfBirth)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Experience)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Salary)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Position)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.PersonnelNumber }) |
-            @Html.ActionLink("Details", "Details", new {  id=item.PersonnelNumber }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.PersonnelNumber })
-        </td>
-    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PersonnelNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MiddleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Experience)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                @Html.ActionLink("Изменить", "Edit", new { id = item.PersonnelNumber }) |
+                @switch (item.Position)
+                {
+                    case "водитель            ":@Html.ActionLink("Информация", "DetailsDriver", new { id = item.PersonnelNumber }); break;
+                    case "кондуктор           ": @Html.ActionLink("Информация", "DetailsConductor", new { id = item.PersonnelNumber }); break;
+                    case "механик             ": @Html.ActionLink("Информация", "DetailsMechanic", new { id = item.PersonnelNumber }); break;
+                    default: @Html.ActionLink("Информация", "DetailsEmployees", new { id = item.PersonnelNumber }); break;
 }
+                |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.PersonnelNumber })
+            </td>
+        </tr>
+    }
 </table>
+<p align="right">
+    @Html.ActionLink("Добавить сотрудника", "Create")
+</p>
+

@@ -11,6 +11,9 @@ namespace BusCompany.Controllers
     public class EmployeesController : Controller
     {
         EmployeesDAO employeesDAO = new EmployeesDAO();
+        DriverDAO driverDAO = new DriverDAO();
+        MechanicDAO mechanicDAO = new MechanicDAO();
+        ConductorDAO conductorDAO = new ConductorDAO();
 
         // GET: Employees
         public ActionResult Index()
@@ -19,10 +22,30 @@ namespace BusCompany.Controllers
         }
 
         // GET: Employees/Details/5
-        public ActionResult Details(int id)
+        public ActionResult DetailsEmployees(int id)
         {
             return View(employeesDAO.GetById(id));
         }
+
+        // GET: Employees/Details/5
+        public ActionResult DetailsDriver(int id)
+        {
+            return View(driverDAO.GetById(id));
+        }
+
+        // GET: Employees/Details/5
+        public ActionResult DetailsMechanic(int id)
+        {
+            return View(mechanicDAO.GetById(id));
+        }
+
+        // GET: Employees/Details/5
+        public ActionResult DetailsConductor(int id)
+        {
+            return View(conductorDAO.GetById(id));
+        }
+
+
 
         // GET: Employees/Create
         public ActionResult Create()

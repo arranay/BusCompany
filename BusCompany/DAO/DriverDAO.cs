@@ -5,13 +5,13 @@ using BusCompany.Models;
 
 namespace BusCompany.DAO
 {
-    public class DriverDAO : EmployeesDAO
+    public class DriverDAO : ClassDAO
     {
         public List<Driver> GetAllDriver()
         {
             Connect();
             List<Driver> driver = new List<Driver>();
-            string query = "SELECT*FROM Employees, Driver where Driver.id=Employees.personnelNumber;";
+            string query = "SELECT*FROM Employees INNER JOIN Driver ON Driver.id=Employees.personnelNumber";
             SqlCommand commandRead = new SqlCommand(query, Connection);
             SqlDataReader reader = commandRead.ExecuteReader();
             if (reader.HasRows)
@@ -39,5 +39,33 @@ namespace BusCompany.DAO
             return driver;
         }
 
+        public Driver GetById(int id)
+        {
+            Connect(); Driver driver = new Driver();
+            string query = "SELECT*FROM Employees INNER JOIN Driver ON Driver.id=Employees.personnelNumber where Employees.personnelNumber=" + id;
+            SqlCommand commandRead = new SqlCommand(query, Connection);
+            SqlDataReader reader = commandRead.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    driver.PersonnelNumber = Convert.ToInt32(reader["personnelNumber"]);
+                    driver.LastName = Convert.ToString(reader["LastName"]);
+                    driver.FirstName = Convert.ToString(reader["FirstName"]);
+                    driver.MiddleName = Convert.ToString(reader["MiddleName"]);
+                    driver.DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"]);
+                    driver.Experience = Convert.ToInt32(reader["Experience"]); ;
+                    driver.Salary = Convert.ToDecimal(reader["Salary"]);
+                    driver.Position = Convert.ToString(reader["Position"]);
+                    driver.Categories = Convert.ToString(reader["categories"]);
+                    driver.RightsDate = Convert.ToDateTime(reader["RightsDate"]);
+                    driver.OnRoute = Convert.ToBoolean(reader["OnRoute"]);
+                }
+            }
+            reader.Close();
+            Disconnect();
+
+            return driver;
+        }
     }
 }

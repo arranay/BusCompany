@@ -1,13 +1,7 @@
-﻿@model BusCompany.Models.Employees
-
-@{
-    ViewBag.Title = "Details";
-}
-
-<h2>Details</h2>
+﻿@model BusCompany.Models.Driver
 
 <div>
-    <h4>Employees</h4>
+    <h4>Driver</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -72,6 +66,30 @@
 
         <dd>
             @Html.DisplayFor(model => model.Position)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Categories)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Categories)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RightsDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RightsDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OnRoute)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OnRoute)
         </dd>
 
     </dl>

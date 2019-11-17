@@ -1,0 +1,67 @@
+﻿@model IEnumerable<BusCompany.Models.Bus>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<p>
+    @Html.ActionLink("Добавить новый автобус", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Номерной знак
+        </th>
+        <th>
+            Марка
+        </th>
+        <th>
+            Технический статус
+        </th>
+        <th>
+            Скорость
+        </th>
+        <th>
+            Расход топлива
+        </th>
+        <th>
+            Пробег
+        </th>
+        <th>
+            Статус
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberPlate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mark)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TechnicalStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Speed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FuelConsumption)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mileage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Изменить", "Edit", new {id=item.NumberPlate }) |
+            @Html.ActionLink("Информация", "Details", new { id=item.NumberPlate }) |
+            @Html.ActionLink("Удалить", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

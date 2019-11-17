@@ -32,18 +32,19 @@ namespace BusCompany.Controllers
 
         // POST: Bus/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Bus bus)
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                if (busDAO.AddBus(bus))
+                    return RedirectToAction("Index");
+                else return View("Create");
             }
             catch
             {
-                return View();
+                return View("Create");
             }
+
         }
 
         // GET: Bus/Edit/5

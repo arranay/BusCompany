@@ -74,5 +74,38 @@ namespace BusCompany.DAO
             return bus;
         }
 
+        public bool AddBus(Bus bus)
+        {
+
+            Connect();
+            try
+            {
+                string sql = "INSERT INTO Bus" +
+                    "(NumberPlate, Mark, TechnicalStatus, Speed, FuelConsumption, Mileage, Status)" +
+                    " VALUES (@NumberPlate, @Mark, @TechnicalStatus, @Speed, @FuelConsumption, @Mileage, @Status)";
+                SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.AddWithValue("@NumberPlate", bus.NumberPlate);
+                cmd_SQL.Parameters.AddWithValue("@Mark", bus.Mark);
+                cmd_SQL.Parameters.AddWithValue("@TechnicalStatus", true);
+                cmd_SQL.Parameters.AddWithValue("@Speed", bus.Speed);
+                cmd_SQL.Parameters.AddWithValue("@FuelConsumption", bus.FuelConsumption);
+                cmd_SQL.Parameters.AddWithValue("@Mileage", bus.Mileage);
+                cmd_SQL.Parameters.AddWithValue("@Status", false);
+                cmd_SQL.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                log.Error("ERROR: " + e.Message);
+                return false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+
+            return true;
+
+        }
+
     }
 }

@@ -59,7 +59,7 @@
         <td>
             @Html.ActionLink("Изменить", "Edit", new {id=item.NumberPlate }) |
             @Html.ActionLink("Информация", "Details", new { id=item.NumberPlate }) |
-            @Html.ActionLink("Удалить", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Удалить", "Delete", new { id = item.NumberPlate })
         </td>
     </tr>
 }

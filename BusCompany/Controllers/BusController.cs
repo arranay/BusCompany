@@ -48,47 +48,50 @@ namespace BusCompany.Controllers
         }
 
         // GET: Bus/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            return View(busDAO.GetById(id));
         }
 
         // POST: Bus/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(string id, Bus bus)
         {
+
             try
             {
-                // TODO: Add update logic here
+                if (busDAO.UpdateBus(id, bus))
+                    return RedirectToAction("Index");
+                else return View("Edit");
 
-                return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("Edit");
             }
         }
 
         // GET: Bus/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
-            return View();
+            return View(busDAO.GetById(id));
         }
 
         // POST: Bus/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(string id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                if (busDAO.DeletBus(id))
+                    return RedirectToAction("Index");
+                else return View("Delete");
             }
             catch
             {
-                return View();
+                return View("Delete");
             }
+
         }
     }
 }

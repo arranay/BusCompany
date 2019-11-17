@@ -290,6 +290,8 @@
     <Content Include="Views\Bus\Index.cshtml" />
     <Content Include="Views\Bus\Details.cshtml" />
     <Content Include="Views\Bus\Create.cshtml" />
+    <Content Include="Views\Bus\Edit.cshtml" />
+    <Content Include="Views\Bus\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -107,5 +107,55 @@ namespace BusCompany.DAO
 
         }
 
+        public bool DeletBus(string id)
+        {
+
+            bool result = true;
+            log4net.Config.DOMConfigurator.Configure();
+            log.Info("Вызывается метод который удаляет автобус");
+            Connect();
+            try
+            {
+                string sql = "DELETE FROM Bus WHERE numberPlate='" + id + "'";
+                SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.ExecuteNonQuery();
+            }
+            catch (SqlException e)
+            {
+                log.Error("ERROR: " + e.Message);
+                result = false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+            return result;
+        }
+
+        public bool UpdateBus(string id, Bus bus)
+        {
+            bool result = true;
+            Connect();
+
+            try
+            {
+                string sql = "UPDATE Bus SET mileage=@Mileage where numberPlate='" + id + "'";
+                SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.AddWithValue("@Mileage", bus.Mileage);
+                cmd_SQL.ExecuteNonQuery();
+            }
+            catch (SqlException e)
+            {
+                log.Error("ERROR: " + e.Message);
+                result = false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+            return result;
+
+        }
+
     }
 }

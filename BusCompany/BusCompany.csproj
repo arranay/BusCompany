@@ -199,6 +199,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Bus.cs" />
     <Compile Include="Models\Conductor.cs" />
     <Compile Include="Models\Driver.cs" />
     <Compile Include="Models\Employees.cs" />
@@ -271,8 +272,6 @@
     <Content Include="Views\Hult\Edit.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\Employees\Create.cshtml" />
-    <Content Include="Views\Driver\Index.cshtml" />
-    <Content Include="Views\Driver\Details.cshtml" />
     <Content Include="Views\Employees\DetailsEmployees.cshtml" />
     <Content Include="Views\Employees\DetailsDriver.cshtml" />
     <Content Include="Views\Employees\DetailsMechanic.cshtml" />

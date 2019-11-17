@@ -83,10 +83,12 @@
                     default: @Html.ActionLink("Удалить", "DeleteEmployees", new { id = item.PersonnelNumber })break;
                  }
             </td>
-        </tr>
+        </tr>  
      }
 </table>
-<p align="right">
-    @Html.ActionLink("Добавить сотрудника", "Create")
-</p>
+<tr>
+    <p align="right">
+        @Html.ActionLink("Добавить сотрудника", "Create")
+    </p>
+</tr>
 

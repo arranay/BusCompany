@@ -56,5 +56,31 @@ namespace BusCompany.DAO
             }
             return result;
         }
+
+        public bool AddConductor(int id)
+        {
+            Connect();
+            try
+            {
+                string sql = "INSERT INTO Conductor" +
+                    "(id, onRoute) VALUES (@id, @onRoute)";
+                SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.AddWithValue("@id", id);
+                cmd_SQL.Parameters.AddWithValue("@onRoute", false);
+                cmd_SQL.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                log.Error("ERROR: " + e.Message);
+                return false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+
+            return true;
+
+        }
     }
 }

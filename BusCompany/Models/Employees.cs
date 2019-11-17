@@ -40,5 +40,16 @@ namespace BusCompany.Models
         {
 
         }
+
+        public Employees(string lastName, string firstName, string middleName, DateTime dateOfBirth, int experience, decimal salary, string position)
+        {
+            this.lastName = lastName;
+            this.firstName = firstName;
+            this.middleName = middleName;
+            this.dateOfBirth = dateOfBirth;
+            this.experience = experience;
+            this.salary = salary;
+            this.position = position;
+        }
     }
 }

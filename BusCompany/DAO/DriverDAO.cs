@@ -121,5 +121,35 @@ namespace BusCompany.DAO
             return result;
         }
 
+        public bool AddDriver(Driver driver, int id)
+        {
+
+                Connect();
+                try
+                {
+                    string sql = "INSERT INTO Driver" +
+                        "(id, categories, rightsDate,onRoute)" +
+                        " VALUES (@id, @categories, @rightsDate, @onRoute)";
+                    SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                    cmd_SQL.Parameters.AddWithValue("@id", id);
+                    cmd_SQL.Parameters.AddWithValue("@categories", driver.Categories);
+                    cmd_SQL.Parameters.AddWithValue("@rightsDate", driver.RightsDate);
+                    cmd_SQL.Parameters.AddWithValue("@onRoute", false);
+                    cmd_SQL.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    log.Error("ERROR: " + e.Message);
+                    return false;
+                }
+                finally
+                {
+                    Disconnect();
+                }
+            
+                return true;
+            
+        }
+
     }
 }

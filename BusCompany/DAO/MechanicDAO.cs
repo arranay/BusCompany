@@ -85,5 +85,32 @@ namespace BusCompany.DAO
             }
             return result;
         }
+
+        public bool AddMechanic(Mechanic mechanic, int id)
+        {
+
+            Connect();
+            try
+            {
+                string sql = "INSERT INTO Mechanic" +
+                    "(id, Qualification) VALUES (@id, @Qualification)";
+                SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.AddWithValue("@id", id);
+                cmd_SQL.Parameters.AddWithValue("@Qualification", mechanic.Qualification);
+                cmd_SQL.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                log.Error("ERROR: " + e.Message);
+                return false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+
+            return true;
+
+        }
     }
 }

@@ -284,6 +284,8 @@
     <Content Include="Views\Employees\EditEmployees.cshtml" />
     <Content Include="Views\Employees\EditDriver.cshtml" />
     <Content Include="Views\Employees\EditMechanic.cshtml" />
+    <Content Include="Views\Employees\CreateDriver.cshtml" />
+    <Content Include="Views\Employees\CreateMechanic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

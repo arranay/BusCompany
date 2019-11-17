@@ -11,7 +11,7 @@ namespace BusCompany.Controllers
         MechanicDAO mechanicDAO = new MechanicDAO();
         ConductorDAO conductorDAO = new ConductorDAO();
 
-        // GET: Employees
+
         public ActionResult Index()
         {
             return View(employeesDAO.GetAllEmployees());
@@ -25,19 +25,19 @@ namespace BusCompany.Controllers
             return View(employeesDAO.GetById(id));
         }
 
-        // GET: Employees/Details/5
+
         public ActionResult DetailsDriver(int id)
         {
             return View(driverDAO.GetById(id));
         }
 
-        // GET: Employees/Details/5
+
         public ActionResult DetailsMechanic(int id)
         {
             return View(mechanicDAO.GetById(id));
         }
 
-        // GET: Employees/Details/5
+
         public ActionResult DetailsConductor(int id)
         {
             return View(conductorDAO.GetById(id));
@@ -45,37 +45,126 @@ namespace BusCompany.Controllers
 
         //*************************Create***************************************
 
-        // GET: Employees/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Employees/Create
         [HttpPost]
         public ActionResult Create([Bind(Exclude = "d")] Employees empl)
         {
-            try
+            int id = employeesDAO.AddEmployees(empl);
+
+            switch (empl.Position)
             {
-                if (employeesDAO.AddEmployees(empl))
-                    return RedirectToAction("Index");
-                else return View("Create");
-            }
-            catch
-            {
-                return View("Create");
+                case "водитель":
+                    try
+                    {
+                        if (id > 0)
+                        {
+                            return RedirectToAction("CreateDriver/" + id);
+                        }
+                        else return View("Create");
+                    }
+                    catch
+                    {
+                        return View("Create");
+                    }
+                    
+
+                case "механик":
+                    try
+                    {
+                        if (id > 0)
+                        {
+                            return RedirectToAction("CreateMechanic/" + id);
+                        }
+                        else return View("Create");
+                    }
+                    catch
+                    {
+                        return View("Create");
+                    }
+
+                case "кондуктор":
+                    try
+                    {
+                        if ((id > 0)&&(conductorDAO.AddConductor(id)))
+                        {
+                            return RedirectToAction("Index");
+                        }
+                        else return View("Create");
+                    }
+                    catch
+                    {
+                        return View("Create");
+                    }
+
+                default:
+                    try
+                    {
+                        if (id > 0)
+                            return RedirectToAction("Index");
+                        else return View("Create");
+                    }
+                    catch
+                    {
+                        return View("Create");
+                    }
+
             }
         }
 
-        //*************************Edit***************************************
+        public ActionResult CreateDriver(int id)
+        {
+            return View();
+        }
 
-        // GET: Employees/Edit/5
+        [HttpPost]
+        public ActionResult CreateDriver([Bind(Exclude = "d")] Driver driver, int id)
+        {
+            try
+            {
+                if (driverDAO.AddDriver(driver, id))
+                    return RedirectToAction("Index");
+                else return View("CreateDriver");
+            }
+            catch
+            {
+                return View("CreateDriver");
+            }
+        }
+
+        public ActionResult CreateMechanic(int id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateMechanic([Bind(Exclude = "d")] Mechanic mechanic, int id)
+        {
+            try
+            {
+                if (mechanicDAO.AddMechanic(mechanic, id))
+                    return RedirectToAction("Index");
+                else return View("CreateMechanic");
+            }
+            catch
+            {
+                return View("CreateMechanic");
+            }
+        }
+
+
+
+        //*************************Edit***************************************
+        
         public ActionResult EditEmployees(int id)
         {
             return View(employeesDAO.GetById(id));
         }
 
-        // POST: Employees/Edit/5
+      
         [HttpPost]
         public ActionResult EditEmployees(int id,Employees empl)
         {
@@ -92,13 +181,11 @@ namespace BusCompany.Controllers
         }
 
         
-        // GET: Employees/Edit/5
         public ActionResult EditDriver(int id)
         {
             return View(driverDAO.GetById(id));
         }
 
-        // POST: Employees/Edit/5
         [HttpPost]
         public ActionResult EditDriver(int id, Driver driver)
         {
@@ -114,13 +201,11 @@ namespace BusCompany.Controllers
             }
         }
 
-        // GET: Employees/Edit/5
         public ActionResult EditMechanic(int id)
         {
             return View(mechanicDAO.GetById(id));
         }
 
-        // POST: Employees/Edit/5
         [HttpPost]
         public ActionResult EditMechanic(int id, Mechanic mechanic)
         {
@@ -138,13 +223,11 @@ namespace BusCompany.Controllers
 
         //*************************Delete***************************************
 
-        // GET: Employees/Delete/5
         public ActionResult DeleteEmployees(int id)
         {
             return View(employeesDAO.GetById(id));
         }
 
-        // POST: Employees/Delete/5
         [HttpPost]
         public ActionResult DeleteEmployees(int id, FormCollection collection)
         {
@@ -161,13 +244,11 @@ namespace BusCompany.Controllers
         }
 
 
-        // GET: Employees/Delete/5
         public ActionResult DeleteMechanic(int id)
         {
             return View(mechanicDAO.GetById(id));
         }
 
-        // POST: Employees/Delete/5
         [HttpPost]
         public ActionResult DeleteMechanic(int id, FormCollection collection)
         {
@@ -183,13 +264,11 @@ namespace BusCompany.Controllers
             }
         }
 
-        // GET: Employees/Delete/5
         public ActionResult DeleteConductor(int id)
         {
             return View(conductorDAO.GetById(id));
         }
 
-        // POST: Employees/Delete/5
         [HttpPost]
         public ActionResult DeleteConductor(int id, FormCollection collection)
         {
@@ -205,13 +284,11 @@ namespace BusCompany.Controllers
             }
         }
 
-        // GET: Employees/Delete/5
         public ActionResult DeleteDriver(int id)
         {
             return View(driverDAO.GetById(id));
         }
 
-        // POST: Employees/Delete/5
         [HttpPost]
         public ActionResult DeleteDriver(int id, FormCollection collection)
         {

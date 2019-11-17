@@ -64,9 +64,9 @@ namespace BusCompany.DAO
             return empl;
         }
 
-        public bool AddEmployees(Employees employees)
+        public int AddEmployees(Employees employees)
         {
-            bool result = true;
+            int result = 0;
             Connect();
 
             try
@@ -81,12 +81,16 @@ namespace BusCompany.DAO
                 cmd_SQL.Parameters.AddWithValue("@DateOfBirth", employees.DateOfBirth);
                 cmd_SQL.Parameters.AddWithValue("@Experience", employees.Experience);
                 cmd_SQL.Parameters.AddWithValue("@Salary", employees.Salary);
-                cmd_SQL.Parameters.AddWithValue("@Position", employees.Position);
+                cmd_SQL.Parameters.AddWithValue("@Position", employees.Position);                
                 cmd_SQL.ExecuteNonQuery();
+
+                cmd_SQL.CommandText = "SELECT @@IDENTITY";
+                result = Convert.ToInt32(cmd_SQL.ExecuteScalar());
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                result = false;
+                log.Error("ERROR: " + e.Message);
+                result = 0;
             }
             finally
             {

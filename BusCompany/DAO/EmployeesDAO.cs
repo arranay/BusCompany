@@ -64,20 +64,20 @@ namespace BusCompany.DAO
             return empl;
         }
 
-        public List<String> GetAllPosition()
+        public List<String> GetAllQualification()
         {
-            List<String> position = new List<string>();
+            List<String> qualification = new List<string>();
             Connect();
             try
             {
-                string query = "SELECT*FROM Position";
+                string query = "SELECT*FROM Qualification";
                 SqlCommand commandRead = new SqlCommand(query, Connection);
                 SqlDataReader reader = commandRead.ExecuteReader();
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        position.Add(Convert.ToString(reader["Name"]));
+                        qualification.Add(Convert.ToString(reader["Name"]));
 
                     }
                 }
@@ -90,13 +90,12 @@ namespace BusCompany.DAO
             {
                 Disconnect();
             }
-            return position;
+            return qualification;
         }
 
         public int AddEmployees(Employees employees)
         {
             int result = 0;
-            List<String> position = GetAllPosition();
             Connect();
             try
             {
@@ -177,6 +176,65 @@ namespace BusCompany.DAO
                 Disconnect();
             }
             return result;
-        }       
+        }
+
+        public List<String> GetAllPosition()
+        {
+            List<String> position = new List<string>();
+            Connect();
+            try
+            {
+                string query = "SELECT*FROM Position";
+                SqlCommand commandRead = new SqlCommand(query, Connection);
+                SqlDataReader reader = commandRead.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        position.Add(Convert.ToString(reader["Name"]));
+
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                log.Error("ERROR: " + e.Message);
+            }
+            finally
+            {
+                Disconnect();
+            }
+            return position;
+        }
+
+        public List<String> GetAllCategories()
+        {
+            List<String> categories = new List<string>();
+            Connect();
+            try
+            {
+                string query = "SELECT*FROM Categories";
+                SqlCommand commandRead = new SqlCommand(query, Connection);
+                SqlDataReader reader = commandRead.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        categories.Add(Convert.ToString(reader["Name"]));
+
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                log.Error("ERROR: " + e.Message);
+            }
+            finally
+            {
+                Disconnect();
+            }
+            return categories;
+        }
+
     }
 }

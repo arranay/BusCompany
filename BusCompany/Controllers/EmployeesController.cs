@@ -120,6 +120,8 @@ namespace BusCompany.Controllers
 
         public ActionResult CreateDriver(int id)
         {
+            SelectList categories = new SelectList(employeesDAO.GetAllCategories());
+            ViewBag.Categories = categories;
             return View();
         }
 
@@ -140,6 +142,8 @@ namespace BusCompany.Controllers
 
         public ActionResult CreateMechanic(int id)
         {
+            SelectList qualification = new SelectList(employeesDAO.GetAllQualification());
+            ViewBag.Qualification = qualification;
             return View();
         }
 

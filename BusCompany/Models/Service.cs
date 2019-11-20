@@ -11,14 +11,19 @@ namespace BusCompany.Models
         private int id;
         private string idBus;
         private int idEmployees;
-        private DateTime date;
+        private DateTime serviceDate;
         private string typeOfWork;
 
         public int Id { get => id; set => id = value; }
         public string IdBus { get => idBus; set => idBus = value; }
         public int IdEmployees { get => idEmployees; set => idEmployees = value; }
         [DataType(DataType.Date)]
-        public DateTime Date { get => date; set => date = value; }
+        public DateTime ServiceDate { get => serviceDate; set => serviceDate = value; }
         public string TypeOfWork { get => typeOfWork; set => typeOfWork = value; }
+        public Bus Bus { get => bus; set => bus = value; }
+        public Employees Employees { get => employees; set => employees = value; }
+
+        private Bus bus;
+        private Employees employees;
     }
 }

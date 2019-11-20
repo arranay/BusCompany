@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using BusCompany.DAO;
 using BusCompany.Models;
 
@@ -47,6 +48,8 @@ namespace BusCompany.Controllers
 
         public ActionResult Create()
         {
+            SelectList position = new SelectList(employeesDAO.GetAllPosition());
+            ViewBag.Position = position;
             return View();
         }
 

@@ -64,11 +64,40 @@ namespace BusCompany.DAO
             return empl;
         }
 
+        public List<String> GetAllPosition()
+        {
+            List<String> position = new List<string>();
+            Connect();
+            try
+            {
+                string query = "SELECT*FROM Position";
+                SqlCommand commandRead = new SqlCommand(query, Connection);
+                SqlDataReader reader = commandRead.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        position.Add(Convert.ToString(reader["Name"]));
+
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                log.Error("ERROR: " + e.Message);
+            }
+            finally
+            {
+                Disconnect();
+            }
+            return position;
+        }
+
         public int AddEmployees(Employees employees)
         {
             int result = 0;
+            List<String> position = GetAllPosition();
             Connect();
-
             try
             {
                 string sql = "INSERT INTO Employees" +
@@ -81,9 +110,8 @@ namespace BusCompany.DAO
                 cmd_SQL.Parameters.AddWithValue("@DateOfBirth", employees.DateOfBirth);
                 cmd_SQL.Parameters.AddWithValue("@Experience", employees.Experience);
                 cmd_SQL.Parameters.AddWithValue("@Salary", employees.Salary);
-                cmd_SQL.Parameters.AddWithValue("@Position", employees.Position);                
+                cmd_SQL.Parameters.AddWithValue("@Position", employees.Position);
                 cmd_SQL.ExecuteNonQuery();
-
                 cmd_SQL.CommandText = "SELECT @@IDENTITY";
                 result = Convert.ToInt32(cmd_SQL.ExecuteScalar());
             }

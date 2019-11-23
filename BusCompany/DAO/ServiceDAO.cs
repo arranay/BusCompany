@@ -11,6 +11,7 @@ namespace BusCompany.DAO
     {
         public List<Service> GetAllService()
         {
+            
             Connect();
             log4net.Config.DOMConfigurator.Configure();
             log.Info("Вызывается метод который возвращает список всех остановок.");
@@ -29,6 +30,8 @@ namespace BusCompany.DAO
                         servise.IdEmployees = Convert.ToInt16(reader["IdEmployees"]);
                         servise.ServiceDate = Convert.ToDateTime(reader["serviceDate"]);
                         servise.TypeOfWork = Convert.ToString(reader["TypeOfWork"]);
+                        servise.Bus = new BusDAO().GetById(servise.IdBus);
+                        servise.Employees = new EmployeesDAO().GetById(servise.IdEmployees);
                         servicelList.Add(servise);
                     }
                 }

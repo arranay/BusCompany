@@ -24,11 +24,19 @@ namespace BusCompany.Controllers
             return View(serviceDAO.GetById(id));
         }
 
+        private void CreateWithMichanic(Service service)
+        {
+            IEnumerable<Mechanic> mechanics = serviceDAO.GetAllMechanic();
+            ViewBag.AllMechanic = new SelectList(mechanics, "personnelNumber", "LastName");
+        }
+
         // GET: Service/Create
         public ActionResult Create()
         {
             SelectList bus = new SelectList(serviceDAO.GetAllBus());
             ViewBag.AllBus = bus;
+            IEnumerable<Mechanic> mechanics = serviceDAO.GetAllMechanic();
+            ViewBag.AllMechanic = new SelectList(mechanics, "personnelNumber", "LastName");
             return View();
         }
 
@@ -38,6 +46,7 @@ namespace BusCompany.Controllers
         {
             try
             {
+                CreateWithMichanic(service);
                 if (serviceDAO.AddService(service))
                     return RedirectToAction("Index");
                 else return View("Create");

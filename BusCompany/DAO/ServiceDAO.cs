@@ -110,7 +110,7 @@ namespace BusCompany.DAO
             try
             {
                 string sql = "INSERT INTO Service (IdBus, IdEmployees, ServiceDate, TypeOfWork) VALUES (@IdBus, @IdEmployees, @ServiceDate, @TypeOfWork); " +
-                    "Update Bus Set status=1 where numberPlate=@IdBus;";
+                    "Update Bus Set technicalStatus=1 where numberPlate=@IdBus;";
                 SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
                 cmd_SQL.Parameters.AddWithValue("@IdBus", service.IdBus);
                 cmd_SQL.Parameters.AddWithValue("@IdEmployees", service.IdEmployees);
@@ -136,7 +136,7 @@ namespace BusCompany.DAO
             Connect();
             try
             {
-                string query = "SELECT*FROM Bus where status=0";
+                string query = "SELECT*FROM Bus where technicalStatus=0";
                 SqlCommand commandRead = new SqlCommand(query, Connection);
                 SqlDataReader reader = commandRead.ExecuteReader();
                 if (reader.HasRows)
@@ -157,6 +157,40 @@ namespace BusCompany.DAO
                 Disconnect();
             }
             return bus;
+        }
+
+        public List<Mechanic> GetAllMechanic()
+        {
+            List<Mechanic> mechanic = new List<Mechanic>();
+            Connect();
+            try
+            {
+                string query = "SELECT*FROM Employees INNER JOIN Mechanic ON Mechanic.id=Employees.personnelNumber where position='механик             '";
+                SqlCommand commandRead = new SqlCommand(query, Connection);
+                SqlDataReader reader = commandRead.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Mechanic mech = new Mechanic();
+                        mech.PersonnelNumber = Convert.ToInt32(reader["personnelNumber"]);
+                        mech.LastName = Convert.ToString(reader["LastName"]);
+                        mech.FirstName = Convert.ToString(reader["FirstName"]);
+                        mech.Qualification = Convert.ToString(reader["qualification"]);
+                        mechanic.Add(mech);
+
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                log.Error("ERROR: " + e.Message);
+            }
+            finally
+            {
+                Disconnect();
+            }
+            return mechanic;
         }
 
     }

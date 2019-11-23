@@ -139,9 +139,10 @@ namespace BusCompany.DAO
 
             try
             {
-                string sql = "UPDATE Bus SET mileage=@Mileage where numberPlate='" + id + "'";
+                string sql = "UPDATE Bus SET mileage=@Mileage, TechnicalStatus=@Status where numberPlate='" + id + "'";
                 SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
                 cmd_SQL.Parameters.AddWithValue("@Mileage", bus.Mileage);
+                cmd_SQL.Parameters.AddWithValue("@Status", bus.Status);
                 cmd_SQL.ExecuteNonQuery();
             }
             catch (SqlException e)

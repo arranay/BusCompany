@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace BusCompany.Models
 {
@@ -25,5 +26,8 @@ namespace BusCompany.Models
 
         private Bus bus;
         private Employees employees;
+
+        [Display(Name = "AllMechanic") ]
+        public List<SelectListItem> AllMechanic { get; set; }
     }
 }

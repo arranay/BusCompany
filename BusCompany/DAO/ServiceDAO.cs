@@ -74,5 +74,30 @@ namespace BusCompany.DAO
             return service;
 
         }
+
+         public bool DeleteService(int id)
+        {
+
+            bool result = true;
+            log4net.Config.DOMConfigurator.Configure();
+            log.Info("Вызывается метод который удаляет остановку");
+            Connect();
+            try
+            {
+                string sql = "DELETE FROM Service WHERE Id =" + id;
+                SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.ExecuteNonQuery();
+            }
+            catch (SqlException e)
+            {
+                log.Error("ERROR" + e.Message);
+                result = false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+            return result;
+        }
     }
 }

@@ -190,6 +190,8 @@ namespace BusCompany.Controllers
         
         public ActionResult EditDriver(int id)
         {
+            SelectList categories = new SelectList(employeesDAO.GetAllCategories());
+            ViewBag.Categories = categories;
             return View(driverDAO.GetById(id));
         }
 
@@ -210,6 +212,8 @@ namespace BusCompany.Controllers
 
         public ActionResult EditMechanic(int id)
         {
+            SelectList qualification = new SelectList(employeesDAO.GetAllQualification());
+            ViewBag.Qualification = qualification;
             return View(mechanicDAO.GetById(id));
         }
 

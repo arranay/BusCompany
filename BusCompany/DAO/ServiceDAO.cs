@@ -174,9 +174,7 @@ namespace BusCompany.DAO
                     {
                         Mechanic mech = new Mechanic();
                         mech.PersonnelNumber = Convert.ToInt32(reader["personnelNumber"]);
-                        mech.LastName = Convert.ToString(reader["LastName"]);
-                        mech.FirstName = Convert.ToString(reader["FirstName"]);
-                        mech.Qualification = Convert.ToString(reader["qualification"]);
+                        mech.LastName = Convert.ToString(reader["LastName"]) + Convert.ToString(reader["FirstName"]) + Convert.ToString(reader["qualification"]);
                         mechanic.Add(mech);
 
                     }

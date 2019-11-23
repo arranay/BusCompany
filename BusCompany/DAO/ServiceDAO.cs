@@ -24,15 +24,15 @@ namespace BusCompany.DAO
                 {
                     while (reader.Read())
                     {
-                        Service servise= new Service();
-                        servise.Id = Convert.ToInt32(reader["id"]);
-                        servise.IdBus = Convert.ToString(reader["IdBus"]);
-                        servise.IdEmployees = Convert.ToInt16(reader["IdEmployees"]);
-                        servise.ServiceDate = Convert.ToDateTime(reader["serviceDate"]);
-                        servise.TypeOfWork = Convert.ToString(reader["TypeOfWork"]);
-                        servise.Bus = new BusDAO().GetById(servise.IdBus);
-                        servise.Employees = new EmployeesDAO().GetById(servise.IdEmployees);
-                        servicelList.Add(servise);
+                        Service service= new Service();
+                        service.Id = Convert.ToInt32(reader["id"]);
+                        service.IdBus = Convert.ToString(reader["IdBus"]);
+                        service.IdEmployees = Convert.ToInt16(reader["IdEmployees"]);
+                        service.ServiceDate = Convert.ToDateTime(reader["serviceDate"]);
+                        service.TypeOfWork = Convert.ToString(reader["TypeOfWork"]);
+                        service.Bus = new BusDAO().GetById(service.IdBus);
+                        service.Employees = new EmployeesDAO().GetById(service.IdEmployees);
+                        servicelList.Add(service);
                     }
                 }
             }
@@ -47,6 +47,32 @@ namespace BusCompany.DAO
             }
 
             return servicelList;
+        }
+
+        public Service GetById(int id)
+        {
+            Connect(); Service service = new Service();
+            string query = "SELECT*FROM Service where id=" + id;
+            SqlCommand commandRead = new SqlCommand(query, Connection);
+            SqlDataReader reader = commandRead.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    service.Id = Convert.ToInt32(reader["id"]);
+                    service.IdBus = Convert.ToString(reader["IdBus"]);
+                    service.IdEmployees = Convert.ToInt16(reader["IdEmployees"]);
+                    service.ServiceDate = Convert.ToDateTime(reader["serviceDate"]);
+                    service.TypeOfWork = Convert.ToString(reader["TypeOfWork"]);
+                    service.Bus = new BusDAO().GetById(service.IdBus);
+                    service.Employees = new EmployeesDAO().GetById(service.IdEmployees);
+                }
+            }
+            reader.Close();
+            Disconnect();
+
+            return service;
+
         }
     }
 }

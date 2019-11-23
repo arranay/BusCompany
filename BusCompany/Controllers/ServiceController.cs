@@ -21,7 +21,7 @@ namespace BusCompany.Controllers
         // GET: Service/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(serviceDAO.GetById(id));
         }
 
         // GET: Service/Create

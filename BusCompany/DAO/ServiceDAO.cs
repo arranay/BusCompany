@@ -191,5 +191,29 @@ namespace BusCompany.DAO
             return mechanic;
         }
 
+        public bool SetTypeOfWork(int id, Service service)
+        {
+            bool result = true;
+            Connect();
+
+            try
+            {
+                string sql = "UPDATE Service SET typeOfWork=@typeOfWork WHERE id=" + id;
+                SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.AddWithValue("@typeOfWork", service.TypeOfWork);
+                cmd_SQL.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+            return result;
+
+        }
+
     }
 }

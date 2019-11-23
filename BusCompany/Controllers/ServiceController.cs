@@ -60,22 +60,24 @@ namespace BusCompany.Controllers
         // GET: Service/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(serviceDAO.GetById(id));
         }
 
         // POST: Service/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Service service
+            )
         {
             try
             {
-                // TODO: Add update logic here
+                if (serviceDAO.SetTypeOfWork(id, service))
+                    return RedirectToAction("Index");
+                else return View("Edit");
 
-                return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("Edit");
             }
         }
 

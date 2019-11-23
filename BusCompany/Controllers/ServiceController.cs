@@ -27,22 +27,24 @@ namespace BusCompany.Controllers
         // GET: Service/Create
         public ActionResult Create()
         {
+            SelectList bus = new SelectList(serviceDAO.GetAllBus());
+            ViewBag.AllBus = bus;
             return View();
         }
 
         // POST: Service/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Service service)
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                if (serviceDAO.AddService(service))
+                    return RedirectToAction("Index");
+                else return View("Create");
             }
             catch
             {
-                return View();
+                return View("Create");
             }
         }
 

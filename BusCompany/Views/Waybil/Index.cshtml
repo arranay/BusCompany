@@ -1,0 +1,62 @@
+﻿@model IEnumerable<BusCompany.Models.Waybil>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Путевые листы</h2>
+
+<p>
+    @Html.ActionLink("Создать новый", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Маршрут
+        </th>
+        <th>
+            Водитель
+        </th>
+        <th>
+            Кондуктор
+        </th>
+        <th>
+            Автобус
+        </th>
+        <th>
+            Дата
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Route.RouteName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Driver.LastName)
+            @Html.DisplayFor(modelItem => item.Driver.FirstName)
+            @Html.DisplayFor(modelItem => item.Driver.MiddleName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Conductor.LastName)
+            @Html.DisplayFor(modelItem => item.Conductor.FirstName)
+            @Html.DisplayFor(modelItem => item.Conductor.MiddleName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bus.NumberPlate)
+            @Html.DisplayFor(modelItem => item.Bus.Mark)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.ActionLink("Редактировать", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Информация", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

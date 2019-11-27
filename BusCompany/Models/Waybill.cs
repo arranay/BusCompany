@@ -6,7 +6,7 @@ using System.Web;
 
 namespace BusCompany.Models
 {
-    public class Waybill
+    public class Waybil
     {
         private int id;
         private int routId;

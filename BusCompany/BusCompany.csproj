@@ -192,6 +192,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RouteController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Controllers\WaybilController.cs" />
     <Compile Include="DAO\BusDAO.cs" />
     <Compile Include="DAO\ConductorDAO.cs" />
     <Compile Include="DAO\MechanicDAO.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="DAO\HultDAO.cs" />
     <Compile Include="DAO\RouteDAO.cs" />
     <Compile Include="DAO\ServiceDAO.cs" />
+    <Compile Include="DAO\WaybillDAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -307,6 +309,7 @@
     <Content Include="Views\Route\Index.cshtml" />
     <Content Include="Views\Route\Details.cshtml" />
     <Content Include="Views\Route\Delete.cshtml" />
+    <Content Include="Views\Waybil\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

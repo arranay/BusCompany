@@ -1,0 +1,53 @@
+﻿@model BusCompany.Models.Route
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Route</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RouteName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RouteName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfHult)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfHult)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApprovedStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApprovedStatus)
+        </dd>
+
+    </dl>
+</div>
+
+    @foreach (var item in ViewBag.IDList)
+    {
+        <tr>
+            <td>
+                @item.HultName ->
+            </td>
+        </tr>
+    }
+    @ViewBag.LustHult
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

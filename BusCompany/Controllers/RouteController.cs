@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BusCompany.DAO;
+using BusCompany.Models;
 
 namespace BusCompany.Controllers
 {
@@ -20,7 +21,16 @@ namespace BusCompany.Controllers
         // GET: Route/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            List<Hult> hultList = routeDAO.GetHultById(id);
+            int count = hultList.Count();
+            if (count != 0)
+            {
+                Hult hult = hultList[hultList.Count - 1];
+                hultList.RemoveAt(count-1);
+                ViewBag.IDList = hultList;
+                ViewBag.LustHult = hult.HultName;
+            }            
+            return View(routeDAO.GetById(id));
         }
 
         // GET: Route/Create

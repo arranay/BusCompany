@@ -116,6 +116,31 @@ namespace BusCompany.DAO
             return hultlList;
         }
 
+        public bool DeleteRoute(int id)
+        {
+
+            bool result = true;
+            log4net.Config.DOMConfigurator.Configure();
+            log.Info("Вызывается метод который удаляет маршрут");
+            Connect();
+            try
+            {
+                string sql = "DELETE FROM RoteHult WHERE Id_Route =" + id + "; DELETE FROM Route WHERE Id =" + id;
+                SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.ExecuteNonQuery();
+            }
+            catch (SqlException e)
+            {
+                log.Error("ERROR" + e.Message);
+                result = false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+            return result;
+        }
+
 
     }
 }

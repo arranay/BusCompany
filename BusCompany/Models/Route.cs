@@ -18,6 +18,6 @@ namespace BusCompany.Models
         public string RouteName { get => routeName; set => routeName = value; }
         public int NumberOfHult { get => numberOfHult; set => numberOfHult = value; }
         public bool ApprovedStatus { get => approvedStatus; set => approvedStatus = value; }
-        public List<Hult> HultOnRoute1 { get => hultOnRoute; set => hultOnRoute = value; }
+        public List<Hult> HultOnRoute { get => hultOnRoute; set => hultOnRoute = value; }
     }
 }

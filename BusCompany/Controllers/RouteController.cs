@@ -80,7 +80,7 @@ namespace BusCompany.Controllers
         // GET: Route/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(routeDAO.GetById(id));
         }
 
         // POST: Route/Delete/5
@@ -89,9 +89,9 @@ namespace BusCompany.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                if (routeDAO.DeleteRoute(id))
+                    return RedirectToAction("Index");
+                else return View("Delete");
             }
             catch
             {

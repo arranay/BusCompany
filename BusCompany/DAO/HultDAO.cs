@@ -80,7 +80,7 @@ namespace BusCompany.DAO
             Connect();
             try
             {
-                string sql = "DELETE FROM Hult WHERE Id =" + id;
+                string sql = "DELETE FROM RoteHult WHERE Id_Hult =" + id + "; DELETE FROM Hult WHERE Id =" + id;
                 SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
                 cmd_SQL.ExecuteNonQuery();
             }

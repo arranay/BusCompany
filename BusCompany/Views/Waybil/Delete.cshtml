@@ -1,0 +1,69 @@
+﻿@model BusCompany.Models.Waybil
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Waybil</h4>
+    <hr />
+    <dl class="dl-horizontal">
+         <dt>
+            Маршрут
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Route.RouteName)
+        </dd>
+
+        <dt>
+           Водитель
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Driver.LastName)
+            @Html.DisplayFor(model => model.Driver.FirstName)
+            @Html.DisplayFor(model => model.Driver.MiddleName)
+        </dd>
+
+        <dt>
+            Кондуктор
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Conductor.LastName)
+            @Html.DisplayFor(model => model.Conductor.FirstName)
+            @Html.DisplayFor(model => model.Conductor.MiddleName)
+        </dd>
+
+        <dt>
+            Автобус
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bus.NumberPlate)
+            @Html.DisplayFor(model => model.Bus.Mark)
+        </dd>
+
+        <dt>
+            Дата
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Назад", "Index")
+        </div>
+    }
+</div>

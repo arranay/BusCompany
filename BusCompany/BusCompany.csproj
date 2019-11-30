@@ -310,6 +310,8 @@
     <Content Include="Views\Route\Details.cshtml" />
     <Content Include="Views\Route\Delete.cshtml" />
     <Content Include="Views\Waybil\Index.cshtml" />
+    <Content Include="Views\Waybil\Details.cshtml" />
+    <Content Include="Views\Waybil\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

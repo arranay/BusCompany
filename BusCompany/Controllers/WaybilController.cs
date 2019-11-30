@@ -20,7 +20,7 @@ namespace BusCompany.Controllers
         // GET: Waybil/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(waybilDAO.GetById(id));
         }
 
         // GET: Waybil/Create
@@ -70,7 +70,7 @@ namespace BusCompany.Controllers
         // GET: Waybil/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(waybilDAO.GetById(id));
         }
 
         // POST: Waybil/Delete/5
@@ -79,13 +79,13 @@ namespace BusCompany.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
+                if (waybilDAO.DeleteWaybil(id))
+                    return RedirectToAction("Index");
+                else
+                    return View("Delete");
+            }catch
             {
-                return View();
+                return View("Delete");
             }
         }
     }

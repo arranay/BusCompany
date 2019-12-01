@@ -1,4 +1,5 @@
 ﻿using BusCompany.DAO;
+using BusCompany.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,22 +27,36 @@ namespace BusCompany.Controllers
         // GET: Waybil/Create
         public ActionResult Create()
         {
+            IEnumerable<string> bus = waybilDAO.GetAllBus();
+            ViewBag.AllBus =new SelectList(bus);
+            IEnumerable<Route> route = waybilDAO.GetAllRoute();
+            ViewBag.AllRoute = new SelectList(route, "id", "routeName");
+            IEnumerable<Driver> drivers = waybilDAO.GetAllDriver();
+            ViewBag.AllDriver = new SelectList(drivers, "personnelNumber", "LastName");
+            IEnumerable<Conductor> conductors = waybilDAO.GetAllConductor();
+            ViewBag.AllConductor = new SelectList(conductors, "personnelNumber", "LastName");
             return View();
         }
 
         // POST: Waybil/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Waybil waybil)
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                IEnumerable<Route> route = waybilDAO.GetAllRoute();
+                ViewBag.AllRoute = new SelectList(route, "id", "routeName");
+                IEnumerable<Driver> drivers = waybilDAO.GetAllDriver();
+                ViewBag.AllDriver = new SelectList(drivers, "personnelNumber", "LastName");
+                IEnumerable<Conductor> conductors = waybilDAO.GetAllConductor();
+                ViewBag.AllConductor = new SelectList(conductors, "personnelNumber", "LastName");
+                if (waybilDAO.AddWaybil(waybil))
+                    return RedirectToAction("Index");
+                else return View("Create");
             }
             catch
             {
-                return View();
+                return View("Create");
             }
         }
 

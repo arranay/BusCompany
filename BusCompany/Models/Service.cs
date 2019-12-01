@@ -26,8 +26,5 @@ namespace BusCompany.Models
 
         private Bus bus;
         private Employees employees;
-
-        [Display(Name = "AllMechanic") ]
-        public List<SelectListItem> AllMechanic { get; set; }
     }
 }

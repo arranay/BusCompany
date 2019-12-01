@@ -312,6 +312,7 @@
     <Content Include="Views\Waybil\Index.cshtml" />
     <Content Include="Views\Waybil\Details.cshtml" />
     <Content Include="Views\Waybil\Delete.cshtml" />
+    <Content Include="Views\Waybil\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -318,6 +318,8 @@
     <Content Include="Views\Employees\AwardPrizeDriver.cshtml" />
     <Content Include="Views\Employees\AwardPrizeMechanic.cshtml" />
     <Content Include="Views\Route\Create.cshtml" />
+    <Content Include="Views\Route\Edit.cshtml" />
+    <Content Include="Views\Route\ErrorStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

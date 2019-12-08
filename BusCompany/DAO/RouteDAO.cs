@@ -170,6 +170,48 @@ namespace BusCompany.DAO
             return result;
         }
 
+        public bool UpdateRoute(int id, bool status)
+        {
+            bool result = true;
+
+            try
+            {
+                Connect();
+                string query = "Select COUNT(*) From Waybil WHERE routeId=" + id;
+                SqlCommand commandRead = new SqlCommand(query, Connection);
+                commandRead.ExecuteNonQuery();
+                int count = Convert.ToInt32(commandRead.ExecuteScalar());
+                if (count > 0) return false;
+                
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+
+            try
+            {
+                Connect();
+                string sql = "UPDATE Route SET approvedStatus=@approvedStatus WHERE id=" + id;
+                SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.AddWithValue("@approvedStatus", status);
+                cmd_SQL.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+            return result;
+
+        }
 
 
     }

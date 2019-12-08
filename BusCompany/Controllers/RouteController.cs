@@ -59,22 +59,22 @@ namespace BusCompany.Controllers
         // GET: Route/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(routeDAO.GetById(id));
         }
 
         // POST: Route/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Route route)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                if (routeDAO.UpdateRoute(id, route.ApprovedStatus))
+                    return RedirectToAction("Index");
+                else return View("ErrorStatus");
             }
             catch
             {
-                return View();
+                return View("Edit");
             }
         }
 

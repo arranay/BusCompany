@@ -36,16 +36,19 @@
 
     </dl>
 </div>
-
-    @foreach (var item in ViewBag.IDList)
+    @if (Model.NumberOfHult > 0)
     {
-        <tr>
-            <td>
-                @item.HultName ->
-            </td>
-        </tr>
+        foreach (var item in ViewBag.IDList)
+        {
+            <tr>
+                <td>
+                    @item.HultName ->
+                </td>
+            </tr>
+        }
+        @ViewBag.LustHult
     }
-    @ViewBag.LustHult
+
 
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

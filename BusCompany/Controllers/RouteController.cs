@@ -23,8 +23,8 @@ namespace BusCompany.Controllers
         {
             List<Hult> hultList = routeDAO.GetHultById(id);
             int count = hultList.Count();
-            if (count != 0)
-            {
+            if (count>0)
+            {    
                 Hult hult = hultList[hultList.Count - 1];
                 hultList.RemoveAt(count-1);
                 ViewBag.IDList = hultList;
@@ -41,18 +41,19 @@ namespace BusCompany.Controllers
 
         // POST: Route/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Route route)
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                if (routeDAO.AddRout(route))
+                    return RedirectToAction("Index");
+                else return View("Create");
             }
             catch
             {
-                return View();
+                return View("Create");
             }
+
         }
 
         // GET: Route/Edit/5

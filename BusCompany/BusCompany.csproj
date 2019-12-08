@@ -317,6 +317,7 @@
     <Content Include="Views\Employees\AwardPrizeConductor.cshtml" />
     <Content Include="Views\Employees\AwardPrizeDriver.cshtml" />
     <Content Include="Views\Employees\AwardPrizeMechanic.cshtml" />
+    <Content Include="Views\Route\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -141,6 +141,36 @@ namespace BusCompany.DAO
             return result;
         }
 
+        public bool AddRout(Route route)
+        {
+            bool result = true;
+            Connect();
+            log4net.Config.DOMConfigurator.Configure();
+            log.Info("Вызывается метод который добавляет новый маршрут");
+
+            try
+            {
+                string sql = "INSERT INTO Route (routeName, numberOfHult, approvedStatus) " +
+                    "VALUES (@routeName, @numberOfHult, @approvedStatus)";
+                SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.AddWithValue("@routeName", route.RouteName);
+                cmd_SQL.Parameters.AddWithValue("@numberOfHult", 0);
+                cmd_SQL.Parameters.AddWithValue("@approvedStatus",false);
+                cmd_SQL.ExecuteNonQuery();
+            }
+            catch (SqlException e)
+            {
+                log.Error("ERROR" + e.Message);
+                result = false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+            return result;
+        }
+
+
 
     }
 }

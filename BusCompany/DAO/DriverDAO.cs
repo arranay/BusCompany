@@ -60,6 +60,7 @@ namespace BusCompany.DAO
                     driver.Categories = Convert.ToString(reader["categories"]);
                     driver.RightsDate = Convert.ToDateTime(reader["RightsDate"]);
                     driver.OnRoute = Convert.ToBoolean(reader["OnRoute"]);
+                    driver.Prize = Convert.ToDecimal(reader["Prize"]);
                 }
             }
             reader.Close();

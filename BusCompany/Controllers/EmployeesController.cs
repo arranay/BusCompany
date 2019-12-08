@@ -314,5 +314,90 @@ namespace BusCompany.Controllers
                 return View(" DeleteDriver");
             }
         }
+        //*************************AwordPrize***************************************
+
+        public ActionResult AwardPrize(int id)
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult AwardPrize(int id, decimal prize)
+        {
+            try
+            {
+                if (employeesDAO.AwardPrize(prize, id))
+                    return RedirectToAction("DetailsEmployees/" + id);
+                else return View("AwardPrize");
+            }
+            catch
+            {
+                return View("AwardPrize");
+            }
+        }
+
+        public ActionResult AwardPrizeMechanic(int id)
+        {
+                return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult AwardPrizeMechanic(int id, decimal prize)
+        {
+            try
+            {
+                if (employeesDAO.AwardPrize(prize, id))
+                    return RedirectToAction("DetailsMechanic/" + id);
+                else return View("AwardPrizeMechanic");
+            }
+            catch
+            {
+                return View("AwardPrizeMechanic");
+            }
+        }
+
+        public ActionResult AwardPrizeDriver(int id)
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult AwardPrizeDriver(int id, decimal prize)
+        {
+            try
+            {
+                if (employeesDAO.AwardPrize(prize, id))
+                    return RedirectToAction("DetailsDriver/" + id);
+                else return View("AwardPrizeDriver");
+            }
+            catch
+            {
+                return View("AwardPrizeDriver");
+            }
+        }
+
+        public ActionResult AwardPrizeConductor(int id)
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult AwardPrizeConductor(int id, decimal prize)
+        {
+            try
+            {
+                if (employeesDAO.AwardPrize(prize, id))
+                    return RedirectToAction("DetailsConductor/" + id);
+                else return View("AwardPrizeConductor");
+            }
+            catch
+            {
+                return View("AwardPrizeConductor");
+            }
+        }
     }
 }

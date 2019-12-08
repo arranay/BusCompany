@@ -26,6 +26,7 @@ namespace BusCompany.DAO
                     mechanic.Salary = Convert.ToDecimal(reader["Salary"]);
                     mechanic.Position = Convert.ToString(reader["Position"]);
                     mechanic.Qualification = Convert.ToString(reader["Qualification"]);
+                    mechanic.Prize = Convert.ToDecimal(reader["Prize"]);
                 }
             }
             reader.Close();

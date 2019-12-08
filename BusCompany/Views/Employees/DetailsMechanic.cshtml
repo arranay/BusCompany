@@ -4,14 +4,12 @@
     ViewBag.Title = "DetailsMechanic";
 }
 
-<h2>DetailsMechanic</h2>
-
 <div>
-    <h4>Mechanic</h4>
+    <h4>Информация о механике</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.PersonnelNumber)
+            Табельный номер
         </dt>
 
         <dd>
@@ -19,7 +17,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LastName)
+            Фамилия
         </dt>
 
         <dd>
@@ -27,7 +25,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
+            Имя
         </dt>
 
         <dd>
@@ -35,7 +33,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MiddleName)
+            Фамилия
         </dt>
 
         <dd>
@@ -43,7 +41,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DateOfBirth)
+            Дата рождения
         </dt>
 
         <dd>
@@ -51,7 +49,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Experience)
+            Опыт работы
         </dt>
 
         <dd>
@@ -59,15 +57,33 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Salary)
+            Заработная плата
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Salary)
         </dd>
+        @if (this.Model.Prize != 0)
+        {
+            <dt>
+                Премия
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Prize)
+            </dd>
+
+            <dt>
+                Зарплата с учётом премии
+            </dt>
+
+            <dd>
+                @(Model.Salary + Model.Prize)
+            </dd>
+        }
 
         <dt>
-            @Html.DisplayNameFor(model => model.Position)
+            Должность
         </dt>
 
         <dd>
@@ -75,7 +91,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Qualification)
+            Квалификация
         </dt>
 
         <dd>
@@ -85,6 +101,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Назад", "Index") |
+    @Html.ActionLink("Назначить премию", "AwardPrize", new { id = Model.PersonnelNumber })
 </p>

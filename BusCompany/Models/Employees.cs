@@ -17,6 +17,7 @@ namespace BusCompany.Models
         protected int experience;
         protected decimal salary;
         protected string position;
+        private decimal prize;
 
         public int PersonnelNumber { get => personnelNumber; set => personnelNumber = value; }
         public string LastName { get => lastName; set => lastName = value; }
@@ -27,6 +28,7 @@ namespace BusCompany.Models
         public int Experience { get => experience; set => experience = value; }
         public decimal Salary { get => salary; set => salary = value; }
         public string Position { get => position; set => position = value; }
+        public decimal Prize { get => prize; set => prize = value; }
 
         public Employees(string lName, string fName, string mName, int exp, decimal sal)
         {

@@ -56,6 +56,7 @@ namespace BusCompany.DAO
                     empl.Experience = Convert.ToInt32(reader["Experience"]); ;
                     empl.Salary = Convert.ToDecimal(reader["Salary"]);
                     empl.Position = Convert.ToString(reader["Position"]);
+                    empl.Prize = Convert.ToDecimal(reader["Prize"]);
                 }
             }
             reader.Close();
@@ -100,8 +101,8 @@ namespace BusCompany.DAO
             try
             {
                 string sql = "INSERT INTO Employees" +
-                    " (LastName, FirstName, MiddleName,DateOfBirth,Experience,Salary,Position)" +
-                    " VALUES (@LastName, @FirstName, @MiddleName,@DateOfBirth,@Experience,@Salary,@Position)";
+                    " (LastName, FirstName, MiddleName,DateOfBirth,Experience,Salary,Position,Prize)" +
+                    " VALUES (@LastName, @FirstName, @MiddleName,@DateOfBirth,@Experience,@Salary,@Position,@Prize)";
                 SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
                 cmd_SQL.Parameters.AddWithValue("@LastName", employees.LastName);
                 cmd_SQL.Parameters.AddWithValue("@FirstName", employees.FirstName);
@@ -110,6 +111,7 @@ namespace BusCompany.DAO
                 cmd_SQL.Parameters.AddWithValue("@Experience", employees.Experience);
                 cmd_SQL.Parameters.AddWithValue("@Salary", employees.Salary);
                 cmd_SQL.Parameters.AddWithValue("@Position", employees.Position);
+                cmd_SQL.Parameters.AddWithValue("@Prize", 0);
                 cmd_SQL.ExecuteNonQuery();
                 cmd_SQL.CommandText = "SELECT @@IDENTITY";
                 result = Convert.ToInt32(cmd_SQL.ExecuteScalar());
@@ -234,6 +236,32 @@ namespace BusCompany.DAO
                 Disconnect();
             }
             return categories;
+        }
+
+        public bool AwardPrize(decimal prize, int id)
+        {
+            log4net.Config.DOMConfigurator.Configure();
+            log.Info("Вызывается метод который назначает рабюотнику премию.");
+            bool result = true;
+            Connect();
+            try
+            {
+                string sql = "UPDATE Employees " +
+                    "SET Prize=@Prize WHERE personnelNumber=" + id;
+                SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.AddWithValue("@Prize", prize);
+                cmd_SQL.ExecuteNonQuery();
+            }
+            catch (SqlException e)
+            {
+                log.Error("ERROR" + e.Message);
+            }
+            finally
+            {
+                Disconnect();
+            }
+            return result;
+
         }
 
     }

@@ -28,6 +28,7 @@ namespace BusCompany.DAO
                     conductor.Salary = Convert.ToDecimal(reader["Salary"]);
                     conductor.Position = Convert.ToString(reader["Position"]);
                     conductor.OnRoute = Convert.ToBoolean(reader["OnRoute"]);
+                    conductor.Prize = Convert.ToDecimal(reader["Prize"]);
                 }
             }
             reader.Close();

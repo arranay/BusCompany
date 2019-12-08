@@ -313,6 +313,10 @@
     <Content Include="Views\Waybil\Details.cshtml" />
     <Content Include="Views\Waybil\Delete.cshtml" />
     <Content Include="Views\Waybil\Create.cshtml" />
+    <Content Include="Views\Employees\AwardPrize.cshtml" />
+    <Content Include="Views\Employees\AwardPrizeConductor.cshtml" />
+    <Content Include="Views\Employees\AwardPrizeDriver.cshtml" />
+    <Content Include="Views\Employees\AwardPrizeMechanic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

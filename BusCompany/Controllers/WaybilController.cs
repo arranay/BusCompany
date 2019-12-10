@@ -67,9 +67,9 @@ namespace BusCompany.Controllers
             ViewBag.AllBus = new SelectList(bus);
             IEnumerable<Route> route = waybilDAO.GetAllRoute();
             ViewBag.AllRoute = new SelectList(route, "id", "routeName");
-            IEnumerable<Driver> drivers = waybilDAO.GetAllDriver();
+            IEnumerable<Driver> drivers = waybilDAO.GetAllDriverPlusOnRoat(id);
             ViewBag.AllDriver = new SelectList(drivers, "personnelNumber", "LastName");
-            IEnumerable<Conductor> conductors = waybilDAO.GetAllConductor();
+            IEnumerable<Conductor> conductors = waybilDAO.GetAllConductorPlusOnRoat(id);
             ViewBag.AllConductor = new SelectList(conductors, "personnelNumber", "LastName");
             return View(waybilDAO.GetById(id));
         }
@@ -84,9 +84,9 @@ namespace BusCompany.Controllers
                 ViewBag.AllBus = new SelectList(bus);
                 IEnumerable<Route> route = waybilDAO.GetAllRoute();
                 ViewBag.AllRoute = new SelectList(route, "id", "routeName");
-                IEnumerable<Driver> drivers = waybilDAO.GetAllDriver();
+                IEnumerable<Driver> drivers = waybilDAO.GetAllDriverPlusOnRoat(id);
                 ViewBag.AllDriver = new SelectList(drivers, "personnelNumber", "LastName");
-                IEnumerable<Conductor> conductors = waybilDAO.GetAllConductor();
+                IEnumerable<Conductor> conductors = waybilDAO.GetAllConductorPlusOnRoat(id);
                 ViewBag.AllConductor = new SelectList(conductors, "personnelNumber", "LastName");
                 if (waybilDAO.UpdateWaybill(id, waybil))
                     return RedirectToAction("Index");

@@ -68,9 +68,17 @@ namespace BusCompany.Controllers
         {
             try
             {
-                if (routeDAO.UpdateRoute(id, route.ApprovedStatus))
-                    return RedirectToAction("Index");
-                else return View("ErrorStatus");
+                if (routeDAO.GetHultById(id).Count >= 5)
+                {
+                    if (routeDAO.UpdateRoute(id, route.ApprovedStatus))
+                        return RedirectToAction("Index");
+                    else return View("ErrorStatus");
+                }
+                else
+                {
+                    return View("ErrorNumber");
+                }
+                
             }
             catch
             {

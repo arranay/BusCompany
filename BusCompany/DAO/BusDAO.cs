@@ -116,7 +116,7 @@ namespace BusCompany.DAO
             Connect();
             try
             {
-                string sql = "DELETE FROM Bus WHERE numberPlate='" + id + "'";
+                string sql = "DELETE FROM Service WHERE idBus='" + id + "';";
                 SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
                 cmd_SQL.ExecuteNonQuery();
             }
@@ -128,6 +128,27 @@ namespace BusCompany.DAO
             finally
             {
                 Disconnect();
+            }
+
+            if (result)
+            {
+                Connect();
+                try
+                {
+                    string sql = "DELETE FROM Bus WHERE numberPlate='" + id + "';";
+                    SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                    cmd_SQL.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    log.Error("ERROR: " + e.Message);
+                    result = false;
+                }
+                finally
+                {
+                    Disconnect();
+                }
+
             }
             return result;
         }

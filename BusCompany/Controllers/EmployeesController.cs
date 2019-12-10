@@ -287,11 +287,11 @@ namespace BusCompany.Controllers
             {
                 if (conductorDAO.DeleteConductor(id))
                     return RedirectToAction("Index");
-                else return View("DeleteConductor");
+                else return View("ErrorConductor");
             }
             catch
             {
-                return View("DeleteConductor");
+                return View("ErrorConductor");
             }
         }
 
@@ -307,11 +307,11 @@ namespace BusCompany.Controllers
             {
                 if (driverDAO.DeleteDriver(id))
                     return RedirectToAction("Index");
-                else return View(" DeleteDriver");
+                else return View("ErrorDriver");
             }
             catch
             {
-                return View(" DeleteDriver");
+                return View("ErrorDriver");
             }
         }
         //*************************AwordPrize***************************************

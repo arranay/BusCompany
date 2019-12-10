@@ -38,20 +38,41 @@ namespace BusCompany.DAO
         public bool DeleteMechanic(int id)
         {
             bool result = true;
+
             Connect();
             try
             {
-                string sql = "DELETE FROM Mechanic WHERE id =" + id+ "; DELETE FROM Employees WHERE personnelNumber =" + id;
+                string sql = "DELETE FROM Service WHERE idEmployees='" + id + "';";
                 SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
                 cmd_SQL.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (SqlException e)
             {
+                log.Error("ERROR: " + e.Message);
                 result = false;
             }
             finally
             {
                 Disconnect();
+            }
+
+            Connect();
+            if (result)
+            {
+                try
+                {
+                    string sql = "DELETE FROM Mechanic WHERE id =" + id+ "; DELETE FROM Employees WHERE personnelNumber =" + id;
+                    SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                    cmd_SQL.ExecuteNonQuery();
+                }
+                catch (Exception)
+                {
+                    result = false;
+                }
+                finally
+                {
+                    Disconnect();
+                }
             }
             return result;
         }

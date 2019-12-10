@@ -98,24 +98,52 @@ namespace BusCompany.DAO
         {
 
             bool result = true;
-            log4net.Config.DOMConfigurator.Configure();
             log.Info("Вызывается метод который удаляет запись в таблице Путевых листов");
+            WaybillDAO waybillD = new WaybillDAO();
+            Waybil waybil = waybillD.GetById(id);
             Connect();
             try
             {
-                string sql = "DELETE FROM Waybil WHERE Id =" + id;
+                string sql = "UPDATE Bus SET Status=@Status where numberPlate='" + waybil.BusId + "';";
+                sql += "UPDATE Conductor SET onRoute=@onRoute1 where Id=" + waybil.ConductorId + ";";
+                sql += "UPDATE Driver SET onRoute=@onRoute2 where Id=" + waybil.DriverId + ";";
                 SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.AddWithValue("@Status", false);
+                cmd_SQL.Parameters.AddWithValue("@onRoute1", false);
+                cmd_SQL.Parameters.AddWithValue("@onRoute2", false);
                 cmd_SQL.ExecuteNonQuery();
             }
             catch (SqlException e)
             {
-                log.Error("ERROR" + e.Message);
+                log.Error("ERROR: " + e.Message);
                 result = false;
             }
             finally
             {
                 Disconnect();
             }
+
+            if (result)
+            {
+                Connect();
+                try
+                {
+                    string sql = "DELETE FROM Waybil WHERE Id =" + id;
+                    SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                    cmd_SQL.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    log.Error("ERROR: " + e.Message);
+                    result = false;
+                }
+                finally
+                {
+                    Disconnect();
+                }
+
+            }
+
             return result;
         }
 
@@ -123,7 +151,6 @@ namespace BusCompany.DAO
         {
             bool result = true;
             Connect();
-            log4net.Config.DOMConfigurator.Configure();
             log.Info("Вызывается метод который добавляет новую запись в таблицу Путевых листов");
 
             try
@@ -139,13 +166,40 @@ namespace BusCompany.DAO
             }
             catch (SqlException e)
             {
-                log.Error("ERROR; " + e.Message);
+                log.Error("ERROR: " + e.Message);
                 result = false;
             }
             finally
             {
                 Disconnect();
             }
+
+            if (result)
+            {
+                Connect();
+                try
+                {
+                    string sql = "UPDATE Bus SET Status=@Status where numberPlate='" + waybil.BusId + "';";
+                    sql+= "UPDATE Conductor SET onRoute=@onRoute1 where Id=" + waybil.ConductorId + ";";
+                    sql += "UPDATE Driver SET onRoute=@onRoute2 where Id=" + waybil.DriverId + ";";
+                    SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                    cmd_SQL.Parameters.AddWithValue("@Status", true);
+                    cmd_SQL.Parameters.AddWithValue("@onRoute1", true);
+                    cmd_SQL.Parameters.AddWithValue("@onRoute2", true);
+                    cmd_SQL.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    log.Error("ERROR: " + e.Message);
+                    result = false;
+                }
+                finally
+                {
+                    Disconnect();
+                }
+
+            }
+
             return result;
         }
 
@@ -155,7 +209,7 @@ namespace BusCompany.DAO
             Connect();
             try
             {
-                string query = "SELECT*FROM Bus where technicalStatus=1";
+                string query = "SELECT*FROM Bus where technicalStatus=1 and Status=0";
                 SqlCommand commandRead = new SqlCommand(query, Connection);
                 SqlDataReader reader = commandRead.ExecuteReader();
                 if (reader.HasRows)
@@ -300,6 +354,73 @@ namespace BusCompany.DAO
             return result;
 
         }
+
+        public List<Driver> GetAllDriverPlusOnRoat(int id)
+        {
+            List<Driver> drivers = new WaybillDAO().GetAllDriver();
+            Waybil waybil = new WaybillDAO().GetById(id);
+            Connect();
+            try
+            {
+                string query = "SELECT*FROM Driver INNER JOIN Employees ON Driver.id=Employees.personnelNumber where Id='" + waybil.DriverId+"'";
+                SqlCommand commandRead = new SqlCommand(query, Connection);
+                SqlDataReader reader = commandRead.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Driver driver = new Driver();
+                        driver.PersonnelNumber = Convert.ToInt32(reader["personnelNumber"]);
+                        driver.LastName = Convert.ToString(reader["LastName"]) + Convert.ToString(reader["FirstName"]) + Convert.ToString(reader["categories"]);
+                        drivers.Add(driver);
+
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                log.Error("ERROR: " + e.Message);
+            }
+            finally
+            {
+                Disconnect();
+            }
+            return drivers;
+        }
+
+        public List<Conductor> GetAllConductorPlusOnRoat(int id)
+        {
+            List<Conductor> conductors = new WaybillDAO().GetAllConductor();
+            Waybil waybil = new WaybillDAO().GetById(id);
+            Connect();
+            try
+            {
+                string query = "SELECT*FROM Conductor INNER JOIN Employees ON Conductor.id=Employees.personnelNumber where Id='" + waybil.ConductorId + "'";
+                SqlCommand commandRead = new SqlCommand(query, Connection);
+                SqlDataReader reader = commandRead.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Conductor conductor = new Conductor();
+                        conductor.PersonnelNumber = Convert.ToInt32(reader["personnelNumber"]);
+                        conductor.LastName = Convert.ToString(reader["LastName"]) + Convert.ToString(reader["FirstName"]);
+                        conductors.Add(conductor);
+
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                log.Error("ERROR: " + e.Message);
+            }
+            finally
+            {
+                Disconnect();
+            }
+            return conductors;
+        }
+
 
     }
 }

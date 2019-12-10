@@ -85,11 +85,11 @@ namespace BusCompany.Controllers
             {
                 if (busDAO.DeletBus(id))
                     return RedirectToAction("Index");
-                else return View("Delete");
+                else return View("ErrorBus");
             }
             catch
             {
-                return View("Delete");
+                return View("ErrorBus");
             }
 
         }

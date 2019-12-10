@@ -320,6 +320,7 @@
     <Content Include="Views\Route\Create.cshtml" />
     <Content Include="Views\Route\Edit.cshtml" />
     <Content Include="Views\Route\ErrorStatus.cshtml" />
+    <Content Include="Views\Waybil\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

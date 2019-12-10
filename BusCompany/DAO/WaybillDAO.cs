@@ -272,5 +272,34 @@ namespace BusCompany.DAO
             return route;
         }
 
+        public bool UpdateWaybill(int id, Waybil waybil)
+        {
+            bool result = true;
+            Connect();
+
+            try
+            {
+                string sql = "UPDATE Waybil SET date=@date,RouteId=@RouteId, " +
+                    "DriverId=@DriverId, ConductorId=@ConductorId, BusId=@BusId WHERE id=" + id;
+                SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.AddWithValue("@date", waybil.Date);
+                cmd_SQL.Parameters.AddWithValue("@DriverId", waybil.DriverId);
+                cmd_SQL.Parameters.AddWithValue("@ConductorId", waybil.ConductorId);
+                cmd_SQL.Parameters.AddWithValue("@BusId", waybil.BusId);
+                cmd_SQL.Parameters.AddWithValue("@RouteId", waybil.RoutId);
+                cmd_SQL.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                log.Error("ERROR: " + e.Message);
+            }
+            finally
+            {
+                Disconnect();
+            }
+            return result;
+
+        }
+
     }
 }

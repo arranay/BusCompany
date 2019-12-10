@@ -63,22 +63,38 @@ namespace BusCompany.Controllers
         // GET: Waybil/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            IEnumerable<string> bus = waybilDAO.GetAllBus();
+            ViewBag.AllBus = new SelectList(bus);
+            IEnumerable<Route> route = waybilDAO.GetAllRoute();
+            ViewBag.AllRoute = new SelectList(route, "id", "routeName");
+            IEnumerable<Driver> drivers = waybilDAO.GetAllDriver();
+            ViewBag.AllDriver = new SelectList(drivers, "personnelNumber", "LastName");
+            IEnumerable<Conductor> conductors = waybilDAO.GetAllConductor();
+            ViewBag.AllConductor = new SelectList(conductors, "personnelNumber", "LastName");
+            return View(waybilDAO.GetById(id));
         }
 
         // POST: Waybil/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Waybil waybil)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                IEnumerable<string> bus = waybilDAO.GetAllBus();
+                ViewBag.AllBus = new SelectList(bus);
+                IEnumerable<Route> route = waybilDAO.GetAllRoute();
+                ViewBag.AllRoute = new SelectList(route, "id", "routeName");
+                IEnumerable<Driver> drivers = waybilDAO.GetAllDriver();
+                ViewBag.AllDriver = new SelectList(drivers, "personnelNumber", "LastName");
+                IEnumerable<Conductor> conductors = waybilDAO.GetAllConductor();
+                ViewBag.AllConductor = new SelectList(conductors, "personnelNumber", "LastName");
+                if (waybilDAO.UpdateWaybill(id, waybil))
+                    return RedirectToAction("Index");
+                else return View("Edit");
             }
             catch
             {
-                return View();
+                return View("Edit");
             }
         }
 

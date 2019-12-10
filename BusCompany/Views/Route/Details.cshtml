@@ -36,6 +36,7 @@
 
     </dl>
 </div>
+<h4>
     @if (Model.NumberOfHult > 0)
     {
         foreach (var item in ViewBag.IDList)
@@ -48,7 +49,9 @@
         }
         @ViewBag.LustHult
     }
+</h4>
 
+<br>
 
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

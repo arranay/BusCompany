@@ -18,6 +18,12 @@ namespace BusCompany.Controllers
             return View(routeDAO.GetAllRoute());
         }
 
+        // GET: Route
+        public ActionResult ErrorNumber()
+        {
+            return View(routeDAO.GetAllRoute());
+        }
+
         // GET: Route/Details/5
         public ActionResult Details(int id)
         {
@@ -31,12 +37,6 @@ namespace BusCompany.Controllers
                 ViewBag.LustHult = hult.HultName;
             }            
             return View(routeDAO.GetById(id));
-        }
-
-        // GET: Route/Create
-        public ActionResult Create()
-        {
-            return View();
         }
 
         // POST: Route/Create

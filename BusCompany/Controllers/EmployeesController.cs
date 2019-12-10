@@ -48,14 +48,16 @@ namespace BusCompany.Controllers
 
         public ActionResult Create()
         {
-            SelectList position = new SelectList(employeesDAO.GetAllPosition());
-            ViewBag.Position = position;
+            SelectList positions = new SelectList(employeesDAO.GetAllPosition());
+            ViewBag.Position = positions;
             return View();
         }
 
         [HttpPost]
         public ActionResult Create([Bind(Exclude = "d")] Employees empl)
         {
+            SelectList positions = new SelectList(employeesDAO.GetAllPosition());
+            ViewBag.Position = positions;
             int id = employeesDAO.AddEmployees(empl);
 
             switch (empl.Position)

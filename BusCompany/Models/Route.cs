@@ -11,6 +11,7 @@ namespace BusCompany.Models
         private string routeName;
         private int numberOfHult;
         private bool approvedStatus;
+        private int hultId;
 
         List<Hult> hultOnRoute;
 
@@ -19,5 +20,6 @@ namespace BusCompany.Models
         public int NumberOfHult { get => numberOfHult; set => numberOfHult = value; }
         public bool ApprovedStatus { get => approvedStatus; set => approvedStatus = value; }
         public List<Hult> HultOnRoute { get => hultOnRoute; set => hultOnRoute = value; }
+        public int HultId { get => hultId; set => hultId = value; }
     }
 }

@@ -4,14 +4,14 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Информация о маршруте</h2>
 
 <div>
     <h4>Route</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.RouteName)
+            Название маршрута
         </dt>
 
         <dd>
@@ -19,40 +19,33 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.NumberOfHult)
+            Кол-во остановок на маршруте
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.NumberOfHult)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ApprovedStatus)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ApprovedStatus)
-        </dd>
-
     </dl>
-</div>
-<h4>
-    @if (Model.NumberOfHult > 0)
-    {
-        foreach (var item in ViewBag.IDList)
+
+    <br>
+    <h4> Список остановок</h4>
+    <h4>
+        @if (Model.NumberOfHult > 0)
         {
-            <tr>
-                <td>
-                    @item.HultName ->
-                </td>
-            </tr>
+            foreach (var item in ViewBag.IDList)
+            {
+                <tr>
+                    <td>
+                        @item.HultName ->
+                    </td>
+                </tr>
+            }
+            @ViewBag.LustHult
         }
-        @ViewBag.LustHult
-    }
-</h4>
+    </h4>
 
-<br>
-
+    <br>
+</div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")

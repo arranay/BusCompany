@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using BusCompany.Models;
 
 namespace BusCompany.DAO
@@ -98,7 +99,7 @@ namespace BusCompany.DAO
                     {
                         Hult hult = new Hult();
                         hult.HultName = Convert.ToString(reader["hultName"]);
-                        hult.RoutNumber = Convert.ToInt32(reader["RouteNumber"]);
+                        hult.Id = Convert.ToInt32(reader["Id_Hult"]);
                         hultlList.Add(hult);
                     }
                 }
@@ -143,9 +144,7 @@ namespace BusCompany.DAO
 
         public bool AddRout(Route route)
         {
-            bool result = true;
             Connect();
-            log4net.Config.DOMConfigurator.Configure();
             log.Info("Вызывается метод который добавляет новый маршрут");
 
             try
@@ -161,13 +160,13 @@ namespace BusCompany.DAO
             catch (SqlException e)
             {
                 log.Error("ERROR" + e.Message);
-                result = false;
+                return false;
             }
             finally
             {
                 Disconnect();
             }
-            return result;
+            return true;
         }
 
         public bool UpdateRoute(int id, bool status)
@@ -184,8 +183,9 @@ namespace BusCompany.DAO
                 if (count > 0) return false;
                 
             }
-            catch (Exception)
+            catch (SqlException e)
             {
+                log.Error("ERROR" + e.Message);
                 result = false;
             }
             finally
@@ -201,8 +201,9 @@ namespace BusCompany.DAO
                 cmd_SQL.Parameters.AddWithValue("@approvedStatus", status);
                 cmd_SQL.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (SqlException e)
             {
+                log.Error("ERROR" + e.Message);
                 result = false;
             }
             finally
@@ -211,6 +212,107 @@ namespace BusCompany.DAO
             }
             return result;
 
+        }
+
+        public bool AddHult(int id, int hultId)
+        {
+            List<Hult> hultList = new RouteDAO().GetHultById(id);
+            int count = hultList.Count();
+
+            bool result = true;
+
+            log.Info("Вызывается метод который добавляет остановку на маршрут");
+
+            try
+            {
+                Connect();
+                string sql = "INSERT INTO RoteHult (Id_Hult, Id_Route, routeNumber) " +
+                    "VALUES (@Id_Hult, @Id_Route, @routeNumber)";
+                SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.AddWithValue("@Id_Hult", hultId);
+                cmd_SQL.Parameters.AddWithValue("@Id_Route", id);
+                cmd_SQL.Parameters.AddWithValue("@routeNumber", count + 1);
+                cmd_SQL.ExecuteNonQuery();
+            }
+            catch (SqlException e)
+            {
+                log.Error("ERROR" + e.Message);
+                result = false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+
+            if (result)
+            {
+            //увеличить кол-во остановок
+                        try
+                        {
+                            Connect();
+                            string sql = "UPDATE Route SET numberOfHult=@numberOfHult WHERE id=" + id;
+                            SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                            cmd_SQL.Parameters.AddWithValue("@numberOfHult", count+1);
+                            cmd_SQL.ExecuteNonQuery();
+                        }
+                        catch (SqlException e)
+                        {
+                            log.Error("ERROR" + e.Message);
+                            result = false;
+                        }
+                        finally
+                        {
+                            Disconnect();
+                        }
+            }
+            
+            return result;
+        }
+
+
+        public List<Hult> GetHultWhithout(int id)
+        {
+            List<Hult> hultList = new RouteDAO().GetHultById(id);
+            Connect();
+            log4net.Config.DOMConfigurator.Configure();
+
+            log.Info("Вызывается метод который возвращает список всех остановок на маршруте.");
+
+            List<Hult> hultlList = new List<Hult>();
+            string query = "SELECT*FROM Hult;";
+
+            SqlCommand commandRead = new SqlCommand(query, Connection);
+            SqlDataReader reader = commandRead.ExecuteReader();
+            try
+            {
+                
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Hult hult = new Hult();
+                        hult.HultName = Convert.ToString(reader["hultName"]);
+                        hult.Id = Convert.ToInt32(reader["Id"]);
+                        bool flag = true;
+                        foreach (Hult h in hultList)
+                        {
+                            if (hult.Id == h.Id) flag=false;
+                        }
+                        if(flag) hultlList.Add(hult);
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                log.Error("ERROR: " + e.Message);
+            }
+            finally
+            {
+                reader.Close();
+                Disconnect();
+            }
+
+            return hultlList;
         }
 
 

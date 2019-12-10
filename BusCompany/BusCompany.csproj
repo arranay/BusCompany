@@ -321,7 +321,7 @@
     <Content Include="Views\Route\Edit.cshtml" />
     <Content Include="Views\Route\ErrorStatus.cshtml" />
     <Content Include="Views\Waybil\Edit.cshtml" />
-    <Content Include="Views\Route\ErrorNumber.cshtml" />
+    <Content Include="Views\Route\AddHult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -18,12 +18,6 @@ namespace BusCompany.Controllers
             return View(routeDAO.GetAllRoute());
         }
 
-        // GET: Route
-        public ActionResult ErrorNumber()
-        {
-            return View(routeDAO.GetAllRoute());
-        }
-
         // GET: Route/Details/5
         public ActionResult Details(int id)
         {
@@ -37,6 +31,12 @@ namespace BusCompany.Controllers
                 ViewBag.LustHult = hult.HultName;
             }            
             return View(routeDAO.GetById(id));
+        }
+
+        // GET: Hult/Create
+        public ActionResult Create()
+        {
+            return View();
         }
 
         // POST: Route/Create
@@ -98,6 +98,55 @@ namespace BusCompany.Controllers
             {
                 return View();
             }
+        }
+
+        // GET: Route/AddHult/5
+        public ActionResult AddHult(int id)
+        {
+            IEnumerable<Hult> hults = routeDAO.GetHultWhithout(id);
+            ViewBag.AllHult = new SelectList(hults, "id", "hultName");
+
+            List<Hult> hultList = routeDAO.GetHultById(id);
+            int count = hultList.Count();
+            if (count > 0)
+            {
+                Hult hult = hultList[hultList.Count - 1];
+                hultList.RemoveAt(count - 1);
+                ViewBag.IDList = hultList;
+                ViewBag.LustHult = hult.HultName;
+            }
+
+            return View(routeDAO.GetById(id));
+        }
+
+        // POST: Route/Create
+        [HttpPost]
+        public ActionResult AddHult(int id, Route route)
+        {
+            try
+            {
+                IEnumerable<Hult> hults = routeDAO.GetHultWhithout(id);
+                ViewBag.AllHult = new SelectList(hults, "id", "hultName");
+
+                List<Hult> hultList = routeDAO.GetHultById(id);
+                int count = hultList.Count();
+
+                if (count > 0)
+                {
+                    Hult hult = hultList[hultList.Count - 1];
+                    hultList.RemoveAt(count - 1);
+                    ViewBag.IDList = hultList;
+                    ViewBag.LustHult = hult.HultName;
+                }
+
+                if (routeDAO.AddHult(id,route.HultId)) return RedirectToAction("Index");
+                    else return View("AddHult");
+            }
+            catch
+            {
+                return View("AddHult");
+            }
+
         }
     }
 }

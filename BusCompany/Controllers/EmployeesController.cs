@@ -12,6 +12,11 @@ namespace BusCompany.Controllers
         MechanicDAO mechanicDAO = new MechanicDAO();
         ConductorDAO conductorDAO = new ConductorDAO();
 
+        //Для сотрудника отдела кадров
+        public ActionResult IndexH()
+        {
+            return View(employeesDAO.GetAllEmployees());
+        }
 
         public ActionResult Index()
         {
@@ -20,7 +25,31 @@ namespace BusCompany.Controllers
 
         //*************************Details***************************************
 
-        // GET: Employees/Details/5
+        //Для сотрудника отдела кадров
+        public ActionResult DetailsEmployeesH(int id)
+        {
+            return View(employeesDAO.GetById(id));
+        }
+
+
+        public ActionResult DetailsDriverH(int id)
+        {
+            return View(driverDAO.GetById(id));
+        }
+
+
+        public ActionResult DetailsMechanicH(int id)
+        {
+            return View(mechanicDAO.GetById(id));
+        }
+
+
+        public ActionResult DetailsConductorH(int id)
+        {
+            return View(conductorDAO.GetById(id));
+        }
+
+        // Для сотрудника бухгалтерии
         public ActionResult DetailsEmployees(int id)
         {
             return View(employeesDAO.GetById(id));
@@ -96,7 +125,7 @@ namespace BusCompany.Controllers
                     {
                         if ((id > 0)&&(conductorDAO.AddConductor(id)))
                         {
-                            return RedirectToAction("Index");
+                            return RedirectToAction("IndexH");
                         }
                         else return View("Create");
                     }
@@ -109,7 +138,7 @@ namespace BusCompany.Controllers
                     try
                     {
                         if (id > 0)
-                            return RedirectToAction("Index");
+                            return RedirectToAction("IndexH");
                         else return View("Create");
                     }
                     catch
@@ -133,7 +162,7 @@ namespace BusCompany.Controllers
             try
             {
                 if (driverDAO.AddDriver(driver, id))
-                    return RedirectToAction("Index");
+                    return RedirectToAction("IndexH");
                 else return View("CreateDriver");
             }
             catch
@@ -155,7 +184,7 @@ namespace BusCompany.Controllers
             try
             {
                 if (mechanicDAO.AddMechanic(mechanic, id))
-                    return RedirectToAction("Index");
+                    return RedirectToAction("IndexH");
                 else return View("CreateMechanic");
             }
             catch
@@ -180,7 +209,7 @@ namespace BusCompany.Controllers
             try
             {
                 if (employeesDAO.EditEmployees(id, empl))
-                    return RedirectToAction("Index");
+                    return RedirectToAction("IndexH");
                 else return View("EditEmployees");
             }
             catch
@@ -200,10 +229,12 @@ namespace BusCompany.Controllers
         [HttpPost]
         public ActionResult EditDriver(int id, Driver driver)
         {
+            SelectList categories = new SelectList(employeesDAO.GetAllCategories());
+            ViewBag.Categories = categories;
             try
             {
                 if (driverDAO.EditDriver(id, driver))
-                    return RedirectToAction("Index");
+                    return RedirectToAction("IndexH");
                 else return View("EditDriver");
             }
             catch
@@ -222,10 +253,12 @@ namespace BusCompany.Controllers
         [HttpPost]
         public ActionResult EditMechanic(int id, Mechanic mechanic)
         {
+            SelectList qualification = new SelectList(employeesDAO.GetAllQualification());
+            ViewBag.Qualification = qualification;
             try
             {
                 if (mechanicDAO.EditMechanic(id, mechanic))
-                    return RedirectToAction("Index");
+                    return RedirectToAction("IndexH");
                 else return View("EditMechanic");
             }
             catch
@@ -247,7 +280,7 @@ namespace BusCompany.Controllers
             try
             {
                 if (employeesDAO.DeleteEmployees(id)) 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("IndexH");
                 else return View("DeleteEmployees");
             }
             catch
@@ -268,7 +301,7 @@ namespace BusCompany.Controllers
             try
             {
                 if (mechanicDAO.DeleteMechanic(id))
-                    return RedirectToAction("Index");
+                    return RedirectToAction("IndexH");
                 else return View("DeleteMechanic");
             }
             catch
@@ -288,7 +321,7 @@ namespace BusCompany.Controllers
             try
             {
                 if (conductorDAO.DeleteConductor(id))
-                    return RedirectToAction("Index");
+                    return RedirectToAction("IndexH");
                 else return View("ErrorConductor");
             }
             catch
@@ -308,7 +341,7 @@ namespace BusCompany.Controllers
             try
             {
                 if (driverDAO.DeleteDriver(id))
-                    return RedirectToAction("Index");
+                    return RedirectToAction("IndexH");
                 else return View("ErrorDriver");
             }
             catch

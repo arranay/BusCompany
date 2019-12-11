@@ -1,15 +1,15 @@
 ﻿@model BusCompany.Models.Employees
 
 @{
-    ViewBag.Title = "Удалить сотрудника";
+    ViewBag.Title = "Информация";
 }
 
-<h3>Вы уверены что хотите удалить данного сотрудника?</h3>
 <div>
+    <h4>Информация о сотруднике</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-           табельный номер
+            Табельный номер
         </dt>
 
         <dd>
@@ -33,7 +33,7 @@
         </dd>
 
         <dt>
-            Отчество
+            Фамилия
         </dt>
 
         <dd>
@@ -49,7 +49,7 @@
         </dd>
 
         <dt>
-           Опыт работы
+            Опыт работы
         </dt>
 
         <dd>
@@ -57,15 +57,34 @@
         </dd>
 
         <dt>
-           Заработная плата
+            Заработная плата
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Salary)
         </dd>
 
+        @if (this.Model.Prize != 0)
+        {
+            <dt>
+                Премия
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Prize)
+            </dd>
+
+            <dt>
+                Зарплата с учётом премии
+            </dt>
+
+            <dd>
+                @(Model.Salary + Model.Prize)
+            </dd>
+        }
+
         <dt>
-           Должность
+            Должность
         </dt>
 
         <dd>
@@ -73,13 +92,7 @@
         </dd>
 
     </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Удалить" class="btn btn-default" /> |
-            @Html.ActionLink("Назад", "IndexH")
-        </div>
-    }
 </div>
+<p>
+    @Html.ActionLink("Назад", "IndexH")
+</p>

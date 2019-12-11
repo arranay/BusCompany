@@ -40,15 +40,18 @@ namespace BusCompany.Models
         public DateTime DateOfBirth { get => dateOfBirth; set => dateOfBirth = value; }
 
         [Required(ErrorMessage = "Данное поле является обязательным")]
+        [Range(1, 200, ErrorMessage = "Проверьте введённые данные")]
         public int Experience { get => experience; set => experience = value; }
 
         [Required(ErrorMessage = "Данное поле является обязательным")]
+        [Range(10000, 30000, ErrorMessage = "Проверьте введённые данные")]
         public decimal Salary { get => salary; set => salary = value; }
 
         [Required(ErrorMessage = "Данное поле является обязательным")]
         public string Position { get => position; set => position = value; }
 
         [Required(ErrorMessage = "Данное поле является обязательным")]
+        [Range(1000, 30000, ErrorMessage = "Проверьте введённые данные")]
         public decimal Prize { get => prize; set => prize = value; }
 
         public Employees(string lName, string fName, string mName, int exp, decimal sal)

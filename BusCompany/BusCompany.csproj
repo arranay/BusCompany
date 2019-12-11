@@ -337,6 +337,11 @@
     <Content Include="Views\Home\IndexHumanResources.cshtml" />
     <Content Include="Views\Home\IndexMaster.cshtml" />
     <Content Include="Views\Home\IndexAccountant.cshtml" />
+    <Content Include="Views\Employees\IndexH.cshtml" />
+    <Content Include="Views\Employees\DetailsEmployeesH.cshtml" />
+    <Content Include="Views\Employees\DetailsDriverH.cshtml" />
+    <Content Include="Views\Employees\DetailsMechanicH.cshtml" />
+    <Content Include="Views\Employees\DetailsConductorH.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

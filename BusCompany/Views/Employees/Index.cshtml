@@ -1,9 +1,6 @@
 ﻿@model IEnumerable<BusCompany.Models.Employees>
 
 <br>
-    <p align="left">
-        @Html.ActionLink("Добавить сотрудника", "Create")
-    </p>
 <table class="table">
     <tr>
         <th>
@@ -63,27 +60,11 @@
             <td>
                 @switch (item.Position)
                 {
-                    case "водитель            ":@Html.ActionLink("Изменить", "EditDriver", new { id = item.PersonnelNumber }); break;
-                case "механик             ": @Html.ActionLink("Изменить", "EditMechanic", new { id = item.PersonnelNumber }); break;
-            default: @Html.ActionLink("Изменить", "EditEmployees", new { id = item.PersonnelNumber }); break;
-    }|
-
-
-                @switch (item.Position)
-                {
                     case "водитель            ":@Html.ActionLink("Информация", "DetailsDriver", new { id = item.PersonnelNumber }); break;
                 case "кондуктор           ": @Html.ActionLink("Информация", "DetailsConductor", new { id = item.PersonnelNumber }); break;
             case "механик             ": @Html.ActionLink("Информация", "DetailsMechanic", new { id = item.PersonnelNumber }); break;
         default: @Html.ActionLink("Информация", "DetailsEmployees", new { id = item.PersonnelNumber }); break;
-}|
-
-                @switch (item.Position)
-                {
-                    case "водитель            ":@Html.ActionLink("Удалить", "DeleteDriver", new { id = item.PersonnelNumber })break;
-                case "кондуктор           ": @Html.ActionLink("Удалить", "DeleteConductor", new { id = item.PersonnelNumber })break;
-            case "механик             ": @Html.ActionLink("Удалить", "DeleteMechanic", new { id = item.PersonnelNumber })break;
-        default: @Html.ActionLink("Удалить", "DeleteEmployees", new { id = item.PersonnelNumber })break;
-}
+                 } 
             </td>
         </tr>
     }

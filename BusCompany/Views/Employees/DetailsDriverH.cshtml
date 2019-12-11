@@ -1,12 +1,12 @@
-﻿@model BusCompany.Models.Conductor
+﻿@model BusCompany.Models.Driver
 
 @{
-    ViewBag.Title = "Удаление кондуктора";
+    ViewBag.Title = "Информация";
 }
 
-<h3>Вы уверены что хотите удалить данного кондуктора?</h3>
+
 <div>
-    <h4>Conductor</h4>
+    <h4>Информация о водителе</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -42,7 +42,7 @@
         </dd>
 
         <dt>
-            Дата раждения
+            Дата рождения
         </dt>
 
         <dd>
@@ -64,6 +64,24 @@
         <dd>
             @Html.DisplayFor(model => model.Salary)
         </dd>
+        @if (this.Model.Prize != 0)
+        {
+            <dt>
+                Премия
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Prize)
+            </dd>
+
+            <dt>
+                Зарплата с учётом премии
+            </dt>
+
+            <dd>
+                @(Model.Salary + Model.Prize)
+            </dd>
+        }
 
         <dt>
             Должность
@@ -71,6 +89,22 @@
 
         <dd>
             @Html.DisplayFor(model => model.Position)
+        </dd>
+
+        <dt>
+            Категория водительских прав
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Categories)
+        </dd>
+
+        <dt>
+            Дата окончания прав
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RightsDate)
         </dd>
 
         <dt>
@@ -82,13 +116,7 @@
         </dd>
 
     </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Удалить" class="btn btn-default" /> |
-            @Html.ActionLink("Назад", "IndexH")
-        </div>
-    }
 </div>
+<p>
+    @Html.ActionLink("Назад", "IndexH")
+</p>

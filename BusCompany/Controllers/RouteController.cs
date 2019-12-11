@@ -113,6 +113,10 @@ namespace BusCompany.Controllers
         {
             IEnumerable<Hult> hults = routeDAO.GetHultWhithout(id);
             ViewBag.AllHult = new SelectList(hults, "id", "hultName");
+            if(hults.Count()==0)
+            {
+                return View("ErrorAdd");
+            }
 
             List<Hult> hultList = routeDAO.GetHultById(id);
             int count = hultList.Count();
@@ -146,7 +150,7 @@ namespace BusCompany.Controllers
                     ViewBag.IDList = hultList;
                     ViewBag.LustHult = hult.HultName;
                 }
-
+                
                 if (routeDAO.AddHult(id,route.HultId)) return RedirectToAction("Index");
                     else return View("AddHult");
             }

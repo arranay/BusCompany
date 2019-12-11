@@ -332,6 +332,7 @@
     <Content Include="Views\Waybil\ErrorBus.cshtml" />
     <Content Include="Views\Waybil\ErrorConductor.cshtml" />
     <Content Include="Views\Waybil\ErrorDriver.cshtml" />
+    <Content Include="Views\Route\ErrorAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

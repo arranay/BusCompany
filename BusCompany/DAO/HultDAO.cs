@@ -73,7 +73,7 @@ namespace BusCompany.DAO
 
         public bool DeleteHult(int id)
         {
-
+            List<Route> routeList = GetRouteById(id);
             bool result = true;
             log4net.Config.DOMConfigurator.Configure();
             log.Info("Вызывается метод который удаляет остановку");
@@ -92,7 +92,7 @@ namespace BusCompany.DAO
             finally
             {
                 Disconnect();
-            }
+            }           
             return result;
         }
 

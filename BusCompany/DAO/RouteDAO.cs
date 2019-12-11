@@ -27,6 +27,7 @@ namespace BusCompany.DAO
                     {
                         Route route = new Route();
                         route.Id = Convert.ToInt32(reader["id"]);
+                        GetCountHult(route.Id);
                         route.RouteName = Convert.ToString(reader["RouteName"]);
                         route.NumberOfHult = Convert.ToInt32(reader["NumberOfHult"]);
                         route.ApprovedStatus = Convert.ToBoolean(reader["ApprovedStatus"]);
@@ -60,6 +61,7 @@ namespace BusCompany.DAO
                     while (reader.Read())
                     {
                         route.Id = Convert.ToInt32(reader["id"]);
+                        GetCountHult(route.Id);
                         route.RouteName = Convert.ToString(reader["RouteName"]);
                         route.NumberOfHult = Convert.ToInt32(reader["NumberOfHult"]);
                         route.ApprovedStatus = Convert.ToBoolean(reader["ApprovedStatus"]);
@@ -315,6 +317,52 @@ namespace BusCompany.DAO
             return hultlList;
         }
 
+        private int GetCountHult(int id)
+        {
+            int count = 0;
+            bool result = true;
+            try
+            {
+                Connect();
+                string query = "Select COUNT(*) From RoteHult WHERE id_route=" + id;
+                SqlCommand commandRead = new SqlCommand(query, Connection);
+                commandRead.ExecuteNonQuery();
+                count = Convert.ToInt32(commandRead.ExecuteScalar());
+            }
+            catch (SqlException e)
+            {
+                log.Error("ERROR" + e.Message);
+                result = false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+
+            if (result)
+            {
+                try
+                {
+                    Connect();
+                    string query = "UPDATE Route SET numberOfHult=@numberOfHult WHERE id=" + id;
+                    SqlCommand cmd_SQL = new SqlCommand(query, Connection);
+                    cmd_SQL.Parameters.AddWithValue("@numberOfHult", count);
+                    cmd_SQL.ExecuteNonQuery();
+
+                }
+                catch (SqlException e)
+                {
+                    log.Error("ERROR" + e.Message);
+                    result = false;
+                }
+                finally
+                {
+                    Disconnect();
+                }
+
+            }
+            return count;
+        }
 
     }
 }

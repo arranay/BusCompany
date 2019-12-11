@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<BusCompany.Models.Hult>
 
+<br>
+<h2>Список остановок</h2>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Создать новую остановку", "Create")
 </p>
 <table class="table">
     <tr>
@@ -17,9 +19,9 @@
             @Html.DisplayFor(modelItem => item.HultName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            @Html.ActionLink("Переименовать", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Маршруты", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Удалить остановку", "Delete", new { id = item.Id })
         </td>
     </tr>
 }

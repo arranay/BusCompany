@@ -31,6 +31,14 @@ namespace BusCompany.Controllers
             ViewBag.AllBus = bus;
             IEnumerable<Mechanic> mechanics = serviceDAO.GetAllMechanic();
             ViewBag.AllMechanic = new SelectList(mechanics, "personnelNumber", "LastName");
+            if (bus.Count() == 0)
+            {
+                return View("ErrorBus");
+            }
+            if (mechanics.Count() == 0)
+            {
+                return View("ErrorMechanic");
+            }
             return View();
         }
 

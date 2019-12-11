@@ -18,19 +18,19 @@ namespace BusCompany.Models
         public int PersonnelNumber { get => personnelNumber; set => personnelNumber = value; }
 
         [Required(ErrorMessage = "Данное поле является обязательным")]
-        [RegularExpression(@"^[A-ЯЁ][а-яё]+\s+", 
+        [RegularExpression(@"^[A-ЯЁ][а-яё]+\s*", 
             ErrorMessage = "Фамилия должна начинатся с заглавной буквы, включать в стебя только русские символы, " +
             "без цифр и посторонних знаков.")]
         public string LastName { get => lastName; set => lastName = value; }
 
         [Required(ErrorMessage = "Данное поле является обязательным")]
-        [RegularExpression(@"^[A-ЯЁ][а-яё]+\s+",
+        [RegularExpression(@"^[A-ЯЁ][а-яё]+\s*",
             ErrorMessage = "Имя должно начинатся с заглавной буквы, включать в стебя только русские символы, " +
             "без цифр и посторонних знаков.")]
         public string FirstName { get => firstName; set => firstName = value; }
 
         [Required(ErrorMessage = "Данное поле является обязательным")]
-        [RegularExpression(@"^[A-ЯЁ][а-яё]+\s+",
+        [RegularExpression(@"^[A-ЯЁ][а-яё]+\s*",
             ErrorMessage = "Отчество должно начинатся с заглавной буквы, включать в стебя только русские символы, " +
             "без цифр и посторонних знаков.")]
         public string MiddleName { get => middleName; set => middleName = value; }

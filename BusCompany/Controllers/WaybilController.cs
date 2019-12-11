@@ -27,14 +27,26 @@ namespace BusCompany.Controllers
         // GET: Waybil/Create
         public ActionResult Create()
         {
-            IEnumerable<string> bus = waybilDAO.GetAllBus();
-            ViewBag.AllBus =new SelectList(bus);
+            SelectList bus = new SelectList(waybilDAO.GetAllBus());
+            ViewBag.AllBus = bus;
             IEnumerable<Route> route = waybilDAO.GetAllRoute();
             ViewBag.AllRoute = new SelectList(route, "id", "routeName");
             IEnumerable<Driver> drivers = waybilDAO.GetAllDriver();
             ViewBag.AllDriver = new SelectList(drivers, "personnelNumber", "LastName");
             IEnumerable<Conductor> conductors = waybilDAO.GetAllConductor();
             ViewBag.AllConductor = new SelectList(conductors, "personnelNumber", "LastName");
+            if (bus.Count() == 0)
+            {
+                return View("ErrorBus");
+            }
+            if (drivers.Count() == 0)
+            {
+                return View("ErrorDriver");
+            }
+            if (conductors.Count() == 0)
+            {
+                return View("ErrorConductor");
+            }
             return View();
         }
 
@@ -44,6 +56,8 @@ namespace BusCompany.Controllers
         {
             try
             {
+                SelectList bus = new SelectList(waybilDAO.GetAllBus());
+                ViewBag.AllBus = bus;
                 IEnumerable<Route> route = waybilDAO.GetAllRoute();
                 ViewBag.AllRoute = new SelectList(route, "id", "routeName");
                 IEnumerable<Driver> drivers = waybilDAO.GetAllDriver();

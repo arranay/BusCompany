@@ -6,13 +6,13 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Hult</h4>
+        <h4>Переименовать остановку</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.HultName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Название остановки", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.HultName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.HultName, "", new { @class = "text-danger" })
@@ -21,14 +21,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Сохранить" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Вернутся к списку всех остановок", "Index")
 </div>
 
 @section Scripts {

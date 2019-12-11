@@ -1,18 +1,15 @@
 ﻿@model BusCompany.Models.Employees
 
 @{
-    ViewBag.Title = "DeleteEmployees";
+    ViewBag.Title = "Удалить сотрудника";
 }
 
-<h2>DeleteEmployees</h2>
-
-<h3>Are you sure you want to delete this?</h3>
+<h3>Вы уверены что хотите удалить данного сотрудника?</h3>
 <div>
-    <h4>Employees</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.PersonnelNumber)
+           табельный номер
         </dt>
 
         <dd>
@@ -20,7 +17,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LastName)
+            Фамилия
         </dt>
 
         <dd>
@@ -28,7 +25,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
+            Имя
         </dt>
 
         <dd>
@@ -36,7 +33,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MiddleName)
+            Отчество
         </dt>
 
         <dd>
@@ -44,7 +41,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DateOfBirth)
+            Дата рождения
         </dt>
 
         <dd>
@@ -52,7 +49,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Experience)
+           Опыт работы
         </dt>
 
         <dd>
@@ -60,7 +57,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Salary)
+           Заработная плата
         </dt>
 
         <dd>
@@ -68,7 +65,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Position)
+           Должность
         </dt>
 
         <dd>
@@ -81,8 +78,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Назад", "Index")
         </div>
     }
 </div>

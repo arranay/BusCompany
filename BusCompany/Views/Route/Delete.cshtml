@@ -1,18 +1,15 @@
 ﻿@model BusCompany.Models.Route
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Удалить";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
+<h3>Вы уверены что хотите удалить данный маршрут?</h3>
 <div>
-    <h4>Route</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.RouteName)
+            Название маршрута
         </dt>
 
         <dd>
@@ -20,7 +17,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.NumberOfHult)
+            Количество остановок
         </dt>
 
         <dd>
@@ -28,7 +25,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ApprovedStatus)
+            Утверждение маршрута
         </dt>
 
         <dd>
@@ -41,7 +38,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
             @Html.ActionLink("Вернутся к просмотру всех маршрутов", "Index")
         </div>
     }

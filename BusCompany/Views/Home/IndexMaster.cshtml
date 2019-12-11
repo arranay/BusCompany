@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Домашняя страницы";
+}
+
+<link type="text/css" rel="stylesheet" href="/Content/Site.css" />
+
+<h3>Вы имеете доступ к следующим функциям системы:</h3>
+<br>
+<div>
+    <ul>
+        <li>@Html.ActionLink("Список автобусов", "Index", "Bus")</li>
+        <li>@Html.ActionLink("Список сервисных работ", "Index", "Service")</li>
+        <ul>
+</div>
+<br>

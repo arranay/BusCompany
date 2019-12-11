@@ -1,21 +1,19 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Домашняя страницы";
 }
 
-<style>
-    body {
-        background: url(BusCompany\BusCompany\BusCompany\Views\navi.jpg);
-    }
-</style>
+<link type="text/css" rel="stylesheet" href="/Content/Site.css" />
 
+<h3>Вы имеете доступ к следующим функциям системы:</h3>
 <br>
-<div>
-    <ul>
-        <li>@Html.ActionLink("Список работников", "Index", "Employees")</li>
-        <li>@Html.ActionLink("Список остановок", "Index", "Hult")</li>
-        <li>@Html.ActionLink("Список автобусов", "Index", "Bus")</li>
-        <li>@Html.ActionLink("Список сервисных работ", "Index", "Service")</li>
-        <li>@Html.ActionLink("Список маршрутов", "Index", "Route")</li>
-        <li>@Html.ActionLink("Список путевых листов", "Index", "Waybil")</li>
+    <div>
+        <ul>
+            <h4>Список остановок:</h4>
+        <li>@Html.ActionLink("Остановки", "Index", "Hult")</li>
+        <br>
+        <h4>Список всех маршрутов:</h4>
+        <li>@Html.ActionLink("Маршруты", "Index", "Route")</li>
         <ul>
 </div>
+<br>
+

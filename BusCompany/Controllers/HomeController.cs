@@ -10,6 +10,27 @@ namespace BusCompany.Controllers
     {
         public ActionResult Index()
         {
+            if (User.IsInRole("Admin"))
+            {
+                return View("IndexAdmin");
+            }
+            if (User.IsInRole("Dispetcher"))
+            {
+                return View("IndexDispetcher");
+            }
+            if (User.IsInRole("HumanResources"))
+            {
+                return View("IndexHumanResources");
+            }
+            if (User.IsInRole("Master"))
+            {
+                return View("IndexMaster");
+            }
+            if (User.IsInRole("Accountant"))
+            {
+                return View("IndexAccountant");
+            }
+
             return View();
         }
 

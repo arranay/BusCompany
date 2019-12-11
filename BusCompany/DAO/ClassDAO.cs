@@ -5,7 +5,7 @@ namespace BusCompany.DAO
 {
     public class ClassDAO
     {
-        private string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        private string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionDB"].ConnectionString;
 
         protected static readonly ILog log = LogManager.GetLogger(typeof(ClassDAO));
         protected SqlConnection Connection { get; set; }

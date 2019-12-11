@@ -326,6 +326,7 @@
     <Content Include="Views\Bus\ErrorBus.cshtml" />
     <Content Include="Views\Employees\ErrorDriver.cshtml" />
     <Content Include="Views\Employees\ErrorConductor.cshtml" />
+    <Content Include="Views\Hult\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

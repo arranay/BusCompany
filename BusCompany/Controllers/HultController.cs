@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using BusCompany.Models;
 using BusCompany.DAO;
+using System.Linq;
 
 namespace BusCompany.Controllers
 {
@@ -83,6 +84,21 @@ namespace BusCompany.Controllers
             {
                 return View("Edit");
             }
+        }
+
+        // GET: Hult/Details/5
+        public ActionResult Details(int id)
+        {
+            List<Route> routeList = hultDAO.GetRouteById(id);
+            int count = routeList.Count();
+            if (count > 0)
+            {
+                Route route = routeList[routeList.Count - 1];
+                routeList.RemoveAt(count - 1);
+                ViewBag.IDList = routeList;
+                ViewBag.LustRoute = route.RouteName;
+            }
+            return View(hultDAO.GetById(id));
         }
 
     }

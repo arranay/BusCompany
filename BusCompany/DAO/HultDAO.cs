@@ -140,5 +140,42 @@ namespace BusCompany.DAO
             return hult;
         }
 
+        public List<Route> GetRouteById(int id)
+        {
+            Connect();
+            log.Info("Вызывается метод который возвращает список всех остановок на маршруте.");
+
+            List<Route> routelList = new List<Route>();
+            string query = "SELECT*FROM RoteHult INNER JOIN Route " +
+                "ON Route.id=RoteHult.Id_Route where Id_Hult=" + id + ";";
+
+            SqlCommand commandRead = new SqlCommand(query, Connection);
+            SqlDataReader reader = commandRead.ExecuteReader();
+            try
+            {
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Route route = new Route();
+                        route.RouteName = Convert.ToString(reader["routeName"]);
+                        route.Id = Convert.ToInt32(reader["Id_Route"]);
+                        routelList.Add(route);
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                log.Error("ERROR: " + e.Message);
+            }
+            finally
+            {
+                reader.Close();
+                Disconnect();
+            }
+
+            return routelList;
+        }
+
     }
 }

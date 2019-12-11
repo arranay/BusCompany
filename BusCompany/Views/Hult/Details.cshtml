@@ -1,0 +1,31 @@
+﻿@model BusCompany.Models.Hult
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <br>
+        <h4> Список маршрутов</h4><br>
+        <h4>
+            @if (!Equals(ViewBag.IDList, null))
+            {
+                foreach (var item in ViewBag.IDList)
+                {
+                    <tr>
+                        <td>
+                            @item.RouteName |
+                        </td>
+                    </tr>
+                }
+                @ViewBag.LustRoute
+            }
+            else
+            {    
+                @Html.Label("Эта остановка не включена ни в один маршрут (((");
+            }
+        </h4>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Вернутся к списку всех остановок", "Index")
+</p>

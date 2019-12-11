@@ -18,7 +18,7 @@ namespace BusCompany.Models
 
         [Required(ErrorMessage = "Данное поле является обязательным")]
         [RegularExpression(@"^[а-яё]{1}[0-9]{3}[а-яё]{2}$",
-            ErrorMessage = "Номерной знак должен соответствовать шаблону: БЦЦЦББ ()")]
+            ErrorMessage = "Номерной знак должен соответствовать шаблону: БЦЦЦББ (Где Б - любая буква русского алфавита, Ц-любая цифра)")]
         public string NumberPlate { get => numberPlate; set => numberPlate = value; }
 
         [Required(ErrorMessage = "Данное поле является обязательным")]

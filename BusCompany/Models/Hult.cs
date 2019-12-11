@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BusCompany.Models
 {
@@ -12,6 +9,10 @@ namespace BusCompany.Models
         private int routNumber;
 
         public int Id { get { return id; } set { id = value; } }
+
+        [Required(ErrorMessage = "Данное поле является обязательным")]
+        [RegularExpression(@"^[A-ЯЁ][а-яё]+\s+",
+            ErrorMessage = "Название остановки должно начинатся с заглавной буквы")]
         public string HultName { get { return hultName; } set { hultName = value; } }
         public int RoutNumber { get => routNumber; set => routNumber = value; }
     }

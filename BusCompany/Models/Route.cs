@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BusCompany.Models
 {
@@ -16,7 +14,10 @@ namespace BusCompany.Models
         List<Hult> hultOnRoute;
 
         public int Id { get => id; set => id = value; }
+
+        [Required(ErrorMessage = "Данное поле является обязательным")]
         public string RouteName { get => routeName; set => routeName = value; }
+
         public int NumberOfHult { get => numberOfHult; set => numberOfHult = value; }
         public bool ApprovedStatus { get => approvedStatus; set => approvedStatus = value; }
         public List<Hult> HultOnRoute { get => hultOnRoute; set => hultOnRoute = value; }

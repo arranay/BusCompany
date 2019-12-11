@@ -25,6 +25,8 @@ namespace BusCompany.Models
         public int DriverId { get => driverId; set => driverId = value; }
         public int ConductorId { get => conductorId; set => conductorId = value; }
         public string BusId { get => busId; set => busId = value; }
+
+        [Required(ErrorMessage = "Данное поле является обязательным")]
         [DataType(DataType.Date)]
         public DateTime Date { get => date; set => date = value; }
         public Route Route { get => route; set => route = value; }

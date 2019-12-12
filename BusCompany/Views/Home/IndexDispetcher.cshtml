@@ -2,14 +2,15 @@
     ViewBag.Title = "Домашняя страницы";
 }
 
-<h3>Вы имеете доступ к следующим функциям системы:</h3>
-<br>
-<div>
-    <ul>
-        <li>@Html.ActionLink("Список остановок", "Index", "Hult")</li>
-        <li>@Html.ActionLink("Список маршрутов", "Index", "Route")</li>
-        <li>@Html.ActionLink("Список путевых листов", "Index", "Waybil")</li>
+<body style="background-image:url(/Content/Imgn/n.jpg)">
+    <h3>Вы имеете доступ к следующим функциям системы:</h3>
+    <br>
+    <div>
         <ul>
-</div>
-<br>
-
+            <li>@Html.ActionLink("Список остановок", "Index", "Hult")</li>
+            <li>@Html.ActionLink("Список маршрутов", "Index", "Route")</li>
+            <li>@Html.ActionLink("Список путевых листов", "Index", "Waybil")</li>
+            <ul>
+    </div>
+    <br>
+</body>

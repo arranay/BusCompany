@@ -144,5 +144,37 @@ namespace BusCompany.DAO
             }
             return result;
         }
+
+        public Users GetUserById(string id)
+        {
+            ConnectUsers(); Users user = new Users();
+            log.Info("Вызывается метод который возвращает пользователя по ID.");
+            SqlCommand commandRead = new SqlCommand("SELECT*FROM AspNetUsers where Id ='" + id + "'", Connection);
+            SqlDataReader reader = commandRead.ExecuteReader();
+                try
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            user.Id = Convert.ToString(reader["id"]);
+                            user.Login = Convert.ToString(reader["Email"]);
+                            user.PhoneNumber = Convert.ToString(reader["PhoneNumber"]);
+                            user.UserName = Convert.ToString(reader[("UserName")]);
+                        }
+                    }
+                }
+                catch (SqlException e)
+                {
+                    log.Error("ERROR" + e.Message);
+                }
+                finally
+                {
+                    reader.Close();
+                    DisconnectUsers();
+                }
+
+            return user;
+        }
     }
 }

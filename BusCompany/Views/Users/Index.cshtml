@@ -32,13 +32,15 @@
         <td>
             @Html.DisplayFor(modelItem => item.UserName)
         </td>
-        @if (item.Role == null)
-        {
         <td>
-            @Html.ActionLink("Назначить пользователю роль", "Edit", new { id = item.Id })
-        </td>
-        }
-        
+    @if (item.Role == null)
+    {
+
+        @Html.ActionLink("Назначить пользователю роль", "Edit", new { id = item.Id })
+
+
+    }
+    </td>
     </tr>
 }
 

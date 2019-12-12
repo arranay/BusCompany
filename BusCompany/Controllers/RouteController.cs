@@ -23,6 +23,10 @@ namespace BusCompany.Controllers
             return View(routeDAO.GetAllRoute());
         }
 
+        public ActionResult IndexDirector()
+        {
+            return View(routeDAO.GetAllRoute());
+        }
         // GET: Route/Details/5
         public ActionResult Details(int id)
         {
@@ -79,7 +83,10 @@ namespace BusCompany.Controllers
         // GET: Route/Edit/5
         public ActionResult Edit(int id)
         {
-            return View(routeDAO.GetById(id));
+            Route route = routeDAO.GetById(id);
+            if (routeDAO.GetHultById(id).Count <= 5) return View("ErrorNumber");
+            if (!(route.ApprovedStatus)) return View(routeDAO.GetById(id));
+            else return View("ErrorStatus");    
         }
 
         // POST: Route/Edit/5
@@ -91,8 +98,8 @@ namespace BusCompany.Controllers
                 if (routeDAO.GetHultById(id).Count >= 5)
                 {
                     if (routeDAO.UpdateRoute(id, route.ApprovedStatus))
-                        return RedirectToAction("Index");
-                    else return View("ErrorStatus");
+                        return RedirectToAction("IndexDirector");
+                    else return View("Edit");
                 }
                 else
                 {

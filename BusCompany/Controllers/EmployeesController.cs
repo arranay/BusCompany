@@ -360,6 +360,10 @@ namespace BusCompany.Controllers
         [HttpPost]
         public ActionResult AwardPrize(int id, decimal prize)
         {
+            if ((prize<=0)||(Equals(prize,null)))
+            {
+                return View("ErrorMSG");
+            }
             try
             {
                 if (employeesDAO.AwardPrize(prize, id))
@@ -406,11 +410,11 @@ namespace BusCompany.Controllers
             {
                 if (employeesDAO.AwardPrize(prize, id))
                     return RedirectToAction("DetailsDriver/" + id);
-                else return View("AwardPrizeDriver");
+                else return View("ErrorMSG");
             }
             catch
             {
-                return View("AwardPrizeDriver");
+                return View("ErrorMSQ");
             }
         }
 

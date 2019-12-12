@@ -14,10 +14,6 @@
         <th>
             Кол-во остановок
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ApprovedStatus)
-        </th>
-
     </tr>
 
     @foreach (var item in Model)
@@ -30,9 +26,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NumberOfHult)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ApprovedStatus)
                 </td>
                 <td>
                     @Html.ActionLink("Информация", "DetailsVisitor", new { id = item.Id })

@@ -18,12 +18,7 @@ namespace BusCompany.Controllers
             return View(waybilDAO.GetAllWaybil());
         }
 
-        // GET: Waybil/Details/5
-        public ActionResult Details(int id)
-        {
-            return View(waybilDAO.GetById(id));
-        }
-
+        
         // GET: Waybil/Create
         public ActionResult Create()
         {
@@ -77,7 +72,7 @@ namespace BusCompany.Controllers
         // GET: Waybil/Edit/5
         public ActionResult Edit(int id)
         {
-            IEnumerable<string> bus = waybilDAO.GetAllBus();
+            IEnumerable<string> bus = waybilDAO.GetAllBusPlusOnRoat(id);
             ViewBag.AllBus = new SelectList(bus);
             IEnumerable<Route> route = waybilDAO.GetAllRoute();
             ViewBag.AllRoute = new SelectList(route, "id", "routeName");
@@ -94,7 +89,7 @@ namespace BusCompany.Controllers
         {
             try
             {
-                IEnumerable<string> bus = waybilDAO.GetAllBus();
+                IEnumerable<string> bus = waybilDAO.GetAllBusPlusOnRoat(id);
                 ViewBag.AllBus = new SelectList(bus);
                 IEnumerable<Route> route = waybilDAO.GetAllRoute();
                 ViewBag.AllRoute = new SelectList(route, "id", "routeName");

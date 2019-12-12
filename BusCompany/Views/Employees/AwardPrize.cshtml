@@ -11,7 +11,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-
+         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <hr />
         <div class="form-group">
             @Html.Label("Введите сумму премии", htmlAttributes: new { @class = "control-label col-md-2" })

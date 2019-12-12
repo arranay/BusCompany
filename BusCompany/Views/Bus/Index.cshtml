@@ -19,18 +19,6 @@
         <th>
             Технический статус
         </th>
-        <th>
-            Скорость
-        </th>
-        <th>
-            Расход топлива
-        </th>
-        <th>
-            Пробег
-        </th>
-        <th>
-            Прикрепление к маршруту
-        </th>
         <th></th>
     </tr>
 
@@ -44,18 +32,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TechnicalStatus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Speed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FuelConsumption)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Mileage)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
             @Html.ActionLink("Изменить", "Edit", new {id=item.NumberPlate }) |

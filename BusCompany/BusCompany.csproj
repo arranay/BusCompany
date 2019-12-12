@@ -311,7 +311,6 @@
     <Content Include="Views\Route\Details.cshtml" />
     <Content Include="Views\Route\Delete.cshtml" />
     <Content Include="Views\Waybil\Index.cshtml" />
-    <Content Include="Views\Waybil\Details.cshtml" />
     <Content Include="Views\Waybil\Delete.cshtml" />
     <Content Include="Views\Waybil\Create.cshtml" />
     <Content Include="Views\Employees\AwardPrize.cshtml" />
@@ -348,6 +347,9 @@
     <Content Include="Views\Route\IndexVisitor.cshtml" />
     <Content Include="Views\Route\DetailsVisitor.cshtml" />
     <Content Include="Views\Hult\DetailsVisitor.cshtml" />
+    <Content Include="Views\Employees\ErrorMSG.cshtml" />
+    <Content Include="Views\Home\IndexDirector.cshtml" />
+    <Content Include="Views\Route\IndexDirector.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

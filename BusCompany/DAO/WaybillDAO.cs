@@ -421,6 +421,35 @@ namespace BusCompany.DAO
             return conductors;
         }
 
+        public List<string> GetAllBusPlusOnRoat(int id)
+        {
+            List<string> busList = new WaybillDAO().GetAllBus();
+            Waybil waybil = new WaybillDAO().GetById(id);
+            Connect();
+            try
+            {
+                string query = "SELECT*FROM Bus where NumberPlate='" + waybil.BusId+"'";
+                SqlCommand commandRead = new SqlCommand(query, Connection);
+                SqlDataReader reader = commandRead.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        busList.Add(Convert.ToString(reader["NumberPlate"]));
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                log.Error("ERROR: " + e.Message);
+            }
+            finally
+            {
+                Disconnect();
+            }
+            return busList;
+        }
+
 
     }
 }

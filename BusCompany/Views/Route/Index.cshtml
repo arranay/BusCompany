@@ -19,7 +19,7 @@
             Кол-во остановок
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ApprovedStatus)
+            Готовность к использованию
         </th>
         <th></th>
     </tr>
@@ -37,8 +37,6 @@
         </td>
         <td>
             @Html.ActionLink("Информация", "Details", new { id = item.Id })
-            @Html.ActionLink(" | Изменить статус маршрута ", "Edit", new { id = item.Id })
-
 
             @if (!item.ApprovedStatus)
             {

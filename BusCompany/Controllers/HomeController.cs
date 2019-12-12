@@ -30,6 +30,10 @@ namespace BusCompany.Controllers
             {
                 return View("IndexAccountant");
             }
+            if (User.IsInRole("Director"))
+            {
+                return View("IndexDirector");
+            }
 
             return View();
         }

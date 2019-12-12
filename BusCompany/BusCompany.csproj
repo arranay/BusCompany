@@ -192,6 +192,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RouteController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\WaybilController.cs" />
     <Compile Include="DAO\BusDAO.cs" />
     <Compile Include="DAO\ConductorDAO.cs" />
@@ -202,6 +203,7 @@
     <Compile Include="DAO\HultDAO.cs" />
     <Compile Include="DAO\RouteDAO.cs" />
     <Compile Include="DAO\ServiceDAO.cs" />
+    <Compile Include="DAO\UsersDAO.cs" />
     <Compile Include="DAO\WaybillDAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -215,8 +217,10 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Mechanic.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Route.cs" />
     <Compile Include="Models\Service.cs" />
+    <Compile Include="Models\Users.cs" />
     <Compile Include="Models\Waybill.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -350,9 +354,12 @@
     <Content Include="Views\Employees\ErrorMSG.cshtml" />
     <Content Include="Views\Home\IndexDirector.cshtml" />
     <Content Include="Views\Route\IndexDirector.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Position\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

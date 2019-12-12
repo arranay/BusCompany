@@ -21,7 +21,21 @@ namespace BusCompany.DAO
         public void Disconnect()
         {
             Connection.Close();
-            log4net.Config.DOMConfigurator.Configure();
+            log.Info("Соединение закрыто");
+        }
+
+        private string connectionStringUsers = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
+        public void ConnectUsers()
+        {
+            Connection = new SqlConnection(connectionStringUsers);
+            Connection.Open();
+            log.Info("Соединение открыто");
+        }
+
+        public void DisconnectUsers()
+        {
+            Connection.Close();
             log.Info("Соединение закрыто");
         }
 

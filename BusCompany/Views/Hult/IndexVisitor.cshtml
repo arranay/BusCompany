@@ -1,0 +1,25 @@
+﻿@model IEnumerable<BusCompany.Models.Hult>
+
+<h2>Список остановок</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Название остановки
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HultName)
+            </td>
+            <td>
+                @Html.ActionLink("Маршруты", "DetailsVisitor", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
+

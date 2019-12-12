@@ -1,0 +1,54 @@
+﻿@model BusCompany.Models.Route
+
+@{
+    ViewBag.Title = "Информация";
+}
+
+<h2>Информация о маршруте</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Название маршрута
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RouteName)
+        </dd>
+
+        <dt>
+            Кол-во остановок на маршруте
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfHult)
+        </dd>
+    </dl>
+
+    <br>
+    <h4> Список остановок</h4>
+    <h4>
+        @if (Model.NumberOfHult > 0)
+        {
+            foreach (var item in ViewBag.IDList)
+            {
+                <tr>
+                    <td>
+                        @item.HultName ->
+                    </td>
+                </tr>
+            }
+            @ViewBag.LustHult
+        }
+        else
+        {
+            @Html.Label("На данном маршруте нет остановок (((");
+        }
+    </h4>
+
+    <br>
+</div>
+<p>
+    @Html.ActionLink("Вернутся к просмотру всех маршрутов", "IndexVisitor")
+</p>

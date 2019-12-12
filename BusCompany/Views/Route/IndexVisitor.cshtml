@@ -1,0 +1,44 @@
+﻿@model IEnumerable<BusCompany.Models.Route>
+
+@{
+    ViewBag.Title = "Список маршрутов";
+}
+
+<h2>Список маршрутов</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Название маршрута
+        </th>
+        <th>
+            Кол-во остановок
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApprovedStatus)
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.ApprovedStatus)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RouteName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfHult)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApprovedStatus)
+                </td>
+                <td>
+                    @Html.ActionLink("Информация", "DetailsVisitor", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    }
+
+</table>

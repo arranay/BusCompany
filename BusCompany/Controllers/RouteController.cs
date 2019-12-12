@@ -18,6 +18,11 @@ namespace BusCompany.Controllers
             return View(routeDAO.GetAllRoute());
         }
 
+        public ActionResult IndexVisitor()
+        {
+            return View(routeDAO.GetAllRoute());
+        }
+
         // GET: Route/Details/5
         public ActionResult Details(int id)
         {
@@ -30,6 +35,21 @@ namespace BusCompany.Controllers
                 ViewBag.IDList = hultList;
                 ViewBag.LustHult = hult.HultName;
             }            
+            return View(routeDAO.GetById(id));
+        }
+
+
+        public ActionResult DetailsVisitor(int id)
+        {
+            List<Hult> hultList = routeDAO.GetHultById(id);
+            int count = hultList.Count();
+            if (count > 0)
+            {
+                Hult hult = hultList[hultList.Count - 1];
+                hultList.RemoveAt(count - 1);
+                ViewBag.IDList = hultList;
+                ViewBag.LustHult = hult.HultName;
+            }
             return View(routeDAO.GetById(id));
         }
 

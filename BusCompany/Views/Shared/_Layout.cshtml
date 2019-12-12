@@ -21,9 +21,9 @@
                 @Html.ActionLink("Автобусное предприятие", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">                   
-                    <li>@Html.ActionLink("Список маршрутов", "Index", "Route")</li>
-                    <li>@Html.ActionLink("Список остановок", "Index", "Hult")</li>
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Список маршрутов", "IndexVisitor", "Route")</li>
+                    <li>@Html.ActionLink("Список остановок", "IndexVisitor", "Hult")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

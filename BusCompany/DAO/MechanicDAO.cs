@@ -10,8 +10,9 @@ namespace BusCompany.DAO
         public Mechanic GetById(int id)
         {
             Connect(); Mechanic mechanic = new Mechanic();
-            string query = "SELECT*FROM Employees INNER JOIN Mechanic ON Mechanic.id=Employees.personnelNumber where Employees.personnelNumber=" + id;
+            string query = "SELECT*FROM Employees INNER JOIN Mechanic ON Mechanic.id=Employees.personnelNumber where Employees.personnelNumber=@id";
             SqlCommand commandRead = new SqlCommand(query, Connection);
+            commandRead.Parameters.AddWithValue("@id", id);
             SqlDataReader reader = commandRead.ExecuteReader();
             if (reader.HasRows)
             {
@@ -42,8 +43,9 @@ namespace BusCompany.DAO
             Connect();
             try
             {
-                string sql = "DELETE FROM Service WHERE idEmployees='" + id + "';";
+                string sql = "DELETE FROM Service WHERE idEmployees='@id';";
                 SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.AddWithValue("@id", id);
                 cmd_SQL.ExecuteNonQuery();
             }
             catch (SqlException e)
@@ -61,8 +63,9 @@ namespace BusCompany.DAO
             {
                 try
                 {
-                    string sql = "DELETE FROM Mechanic WHERE id =" + id+ "; DELETE FROM Employees WHERE personnelNumber =" + id;
+                    string sql = "DELETE FROM Mechanic WHERE id =@id; DELETE FROM Employees WHERE personnelNumber =@id";
                     SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                    cmd_SQL.Parameters.AddWithValue("@id", id);
                     cmd_SQL.ExecuteNonQuery();
                 }
                 catch (Exception)
@@ -91,8 +94,9 @@ namespace BusCompany.DAO
                 try
                 {
                     string sql = "UPDATE mechanic " +
-                        "SET qualification=@qualification WHERE id=" + id;
+                        "SET qualification=@qualification WHERE id=@id";
                     SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                    cmd_SQL.Parameters.AddWithValue("@id", id);
                     cmd_SQL.Parameters.AddWithValue("@qualification", mechanic.Qualification);
                     cmd_SQL.ExecuteNonQuery();
                 }

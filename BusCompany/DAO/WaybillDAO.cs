@@ -57,8 +57,9 @@ namespace BusCompany.DAO
         public Waybil GetById(int id)
         {
             Connect(); Waybil waybil = new Waybil();
-            string query = "SELECT*FROM Waybil where id=" + id;
+            string query = "SELECT*FROM Waybil where id=@id";
             SqlCommand commandRead = new SqlCommand(query, Connection);
+            commandRead.Parameters.AddWithValue("@id", id);
             SqlDataReader reader = commandRead.ExecuteReader();
             try
             {
@@ -104,10 +105,13 @@ namespace BusCompany.DAO
             Connect();
             try
             {
-                string sql = "UPDATE Bus SET Status=@Status where numberPlate='" + waybil.BusId + "';";
-                sql += "UPDATE Conductor SET onRoute=@onRoute1 where Id=" + waybil.ConductorId + ";";
-                sql += "UPDATE Driver SET onRoute=@onRoute2 where Id=" + waybil.DriverId + ";";
+                string sql = "UPDATE Bus SET Status=@Status where numberPlate='@BusId';";
+                sql += "UPDATE Conductor SET onRoute=@onRoute1 where Id=@ConductorId;";
+                sql += "UPDATE Driver SET onRoute=@onRoute2 where Id=@DriverId;";
                 SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.AddWithValue("@BusId", waybil.BusId);
+                cmd_SQL.Parameters.AddWithValue("@ConductorId", waybil.ConductorId);
+                cmd_SQL.Parameters.AddWithValue("@DriverId", waybil.DriverId);
                 cmd_SQL.Parameters.AddWithValue("@Status", false);
                 cmd_SQL.Parameters.AddWithValue("@onRoute1", false);
                 cmd_SQL.Parameters.AddWithValue("@onRoute2", false);
@@ -128,8 +132,9 @@ namespace BusCompany.DAO
                 Connect();
                 try
                 {
-                    string sql = "DELETE FROM Waybil WHERE Id =" + id;
+                    string sql = "DELETE FROM Waybil WHERE Id =@id";
                     SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                    cmd_SQL.Parameters.AddWithValue("@id", id);
                     cmd_SQL.ExecuteNonQuery();
                 }
                 catch (SqlException e)
@@ -179,10 +184,13 @@ namespace BusCompany.DAO
                 Connect();
                 try
                 {
-                    string sql = "UPDATE Bus SET Status=@Status where numberPlate='" + waybil.BusId + "';";
-                    sql+= "UPDATE Conductor SET onRoute=@onRoute1 where Id=" + waybil.ConductorId + ";";
-                    sql += "UPDATE Driver SET onRoute=@onRoute2 where Id=" + waybil.DriverId + ";";
+                    string sql = "UPDATE Bus SET Status=@Status where numberPlate='@BusId';";
+                    sql+= "UPDATE Conductor SET onRoute=@onRoute1 where Id=@ConductorId;";
+                    sql += "UPDATE Driver SET onRoute=@onRoute2 where Id=@DriverId;";
                     SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                    cmd_SQL.Parameters.AddWithValue("@BusId", waybil.BusId);
+                    cmd_SQL.Parameters.AddWithValue("@ConductorId", waybil.ConductorId);
+                    cmd_SQL.Parameters.AddWithValue("@DriverId", waybil.DriverId);
                     cmd_SQL.Parameters.AddWithValue("@Status", true);
                     cmd_SQL.Parameters.AddWithValue("@onRoute1", true);
                     cmd_SQL.Parameters.AddWithValue("@onRoute2", true);
@@ -334,8 +342,9 @@ namespace BusCompany.DAO
             try
             {
                 string sql = "UPDATE Waybil SET date=@date,RouteId=@RouteId, " +
-                    "DriverId=@DriverId, ConductorId=@ConductorId, BusId=@BusId WHERE id=" + id;
+                    "DriverId=@DriverId, ConductorId=@ConductorId, BusId=@BusId WHERE id=@Id";
                 SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.AddWithValue("@Id", id);
                 cmd_SQL.Parameters.AddWithValue("@date", waybil.Date);
                 cmd_SQL.Parameters.AddWithValue("@DriverId", waybil.DriverId);
                 cmd_SQL.Parameters.AddWithValue("@ConductorId", waybil.ConductorId);
@@ -362,8 +371,9 @@ namespace BusCompany.DAO
             Connect();
             try
             {
-                string query = "SELECT*FROM Driver INNER JOIN Employees ON Driver.id=Employees.personnelNumber where Id='" + waybil.DriverId+"'";
+                string query = "SELECT*FROM Driver INNER JOIN Employees ON Driver.id=Employees.personnelNumber where Id=@DriverId";
                 SqlCommand commandRead = new SqlCommand(query, Connection);
+                commandRead.Parameters.AddWithValue("@DriverId", waybil.DriverId);
                 SqlDataReader reader = commandRead.ExecuteReader();
                 if (reader.HasRows)
                 {
@@ -395,8 +405,9 @@ namespace BusCompany.DAO
             Connect();
             try
             {
-                string query = "SELECT*FROM Conductor INNER JOIN Employees ON Conductor.id=Employees.personnelNumber where Id='" + waybil.ConductorId + "'";
+                string query = "SELECT*FROM Conductor INNER JOIN Employees ON Conductor.id=Employees.personnelNumber where Id=@ConductorId";
                 SqlCommand commandRead = new SqlCommand(query, Connection);
+                commandRead.Parameters.AddWithValue("@ConductorId", waybil.ConductorId);
                 SqlDataReader reader = commandRead.ExecuteReader();
                 if (reader.HasRows)
                 {
@@ -428,8 +439,9 @@ namespace BusCompany.DAO
             Connect();
             try
             {
-                string query = "SELECT*FROM Bus where NumberPlate='" + waybil.BusId+"'";
+                string query = "SELECT*FROM Bus where NumberPlate='@BusId'";
                 SqlCommand commandRead = new SqlCommand(query, Connection);
+                commandRead.Parameters.AddWithValue("@BusId", waybil.BusId);
                 SqlDataReader reader = commandRead.ExecuteReader();
                 if (reader.HasRows)
                 {

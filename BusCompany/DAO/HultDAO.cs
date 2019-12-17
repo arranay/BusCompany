@@ -80,8 +80,9 @@ namespace BusCompany.DAO
             Connect();
             try
             {
-                string sql = "DELETE FROM RoteHult WHERE Id_Hult =" + id + "; DELETE FROM Hult WHERE Id =" + id;
+                string sql = "DELETE FROM RoteHult WHERE Id_Hult =@id; DELETE FROM Hult WHERE Id =@id";
                 SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.AddWithValue("@id", id);
                 cmd_SQL.ExecuteNonQuery();
             }
             catch (SqlException e)
@@ -103,8 +104,9 @@ namespace BusCompany.DAO
 
             try
             {
-                string sql = "UPDATE Hult SET hultName=@hultName WHERE id=" + id;
+                string sql = "UPDATE Hult SET hultName=@hultName WHERE id=@id";
                 SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.AddWithValue("@id", id);
                 cmd_SQL.Parameters.AddWithValue("@hultName", hult.HultName);               
                 cmd_SQL.ExecuteNonQuery();
             }
@@ -123,8 +125,9 @@ namespace BusCompany.DAO
         public Hult GetById(int id)
         {
             Connect(); Hult hult = new Hult();
-            string query = "SELECT*FROM Hult where id=" + id;
+            string query = "SELECT*FROM Hult where id=@id";
             SqlCommand commandRead = new SqlCommand(query, Connection);
+            commandRead.Parameters.AddWithValue("@id", id);
             SqlDataReader reader = commandRead.ExecuteReader();
             if (reader.HasRows)
             {
@@ -147,9 +150,10 @@ namespace BusCompany.DAO
 
             List<Route> routelList = new List<Route>();
             string query = "SELECT*FROM RoteHult INNER JOIN Route " +
-                "ON Route.id=RoteHult.Id_Route where Id_Hult=" + id + ";";
+                "ON Route.id=RoteHult.Id_Route where Id_Hult=@id;";
 
             SqlCommand commandRead = new SqlCommand(query, Connection);
+            commandRead.Parameters.AddWithValue("@id", id);
             SqlDataReader reader = commandRead.ExecuteReader();
             try
             {

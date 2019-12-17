@@ -12,8 +12,9 @@ namespace BusCompany.DAO
         public Conductor GetById(int id)
         {
             Connect(); Conductor conductor = new Conductor();
-            string query = "SELECT*FROM Employees INNER JOIN Conductor ON Conductor.id=Employees.personnelNumber where Employees.personnelNumber=" + id;
+            string query = "SELECT*FROM Employees INNER JOIN Conductor ON Conductor.id=Employees.personnelNumber where Employees.personnelNumber=@id";
             SqlCommand commandRead = new SqlCommand(query, Connection);
+            commandRead.Parameters.AddWithValue("@id", id);
             SqlDataReader reader = commandRead.ExecuteReader();
             if (reader.HasRows)
             {
@@ -43,8 +44,9 @@ namespace BusCompany.DAO
             Connect();
             try
             {
-                string sql = "DELETE FROM Conductor WHERE id =" + id + "; DELETE FROM Employees WHERE personnelNumber =" + id;
+                string sql = "DELETE FROM Conductor WHERE id =@id; DELETE FROM Employees WHERE personnelNumber =@id";
                 SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.AddWithValue("@id", id);
                 cmd_SQL.ExecuteNonQuery();
             }
             catch (Exception)

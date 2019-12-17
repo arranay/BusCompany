@@ -149,8 +149,10 @@ namespace BusCompany.DAO
         {
             ConnectUsers(); Users user = new Users();
             log.Info("Вызывается метод который возвращает пользователя по ID.");
-            SqlCommand commandRead = new SqlCommand("SELECT*FROM AspNetUsers where Id ='" + id + "'", Connection);
+            SqlCommand commandRead = new SqlCommand("SELECT*FROM AspNetUsers where Id ='@id'", Connection);
+            commandRead.Parameters.AddWithValue("@id", id);
             SqlDataReader reader = commandRead.ExecuteReader();
+            
                 try
                 {
                     if (reader.HasRows)

@@ -41,8 +41,9 @@ namespace BusCompany.DAO
         public Employees GetById(int id)
         {
             Connect(); Employees empl = new Employees();
-            string query = "SELECT*FROM Employees where personnelNumber=" + id;
+            string query = "SELECT*FROM Employees where personnelNumber=@id";
             SqlCommand commandRead = new SqlCommand(query, Connection);
+            commandRead.Parameters.Add(new SqlParameter("@id", id));
             SqlDataReader reader = commandRead.ExecuteReader();
             if (reader.HasRows)
             {
@@ -139,8 +140,9 @@ namespace BusCompany.DAO
             {
                 string sql = "UPDATE Employees " +
                     "SET LastName=@LastName, FirstName=@FirstName, MiddleName=@MiddleName," +
-                    "Experience=@Experience,Salary=@Salary WHERE personnelNumber=" + id;
+                    "Experience=@Experience,Salary=@Salary WHERE personnelNumber=@id";
                 SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.Add(new SqlParameter("@id", id));
                 cmd_SQL.Parameters.AddWithValue("@LastName", employees.LastName);
                 cmd_SQL.Parameters.AddWithValue("@FirstName", employees.FirstName);
                 cmd_SQL.Parameters.AddWithValue("@MiddleName", employees.MiddleName);
@@ -165,8 +167,9 @@ namespace BusCompany.DAO
             Connect();
             try
             {
-                string sql = "DELETE FROM Employees WHERE personnelNumber =" + id;
+                string sql = "DELETE FROM Employees WHERE personnelNumber = @id";
                 SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.Add(new SqlParameter("@id", id));
                 cmd_SQL.ExecuteNonQuery();
             }
             catch (Exception)
@@ -247,8 +250,9 @@ namespace BusCompany.DAO
             try
             {
                 string sql = "UPDATE Employees " +
-                    "SET Prize=@Prize WHERE personnelNumber=" + id;
+                    "SET Prize=@Prize WHERE personnelNumber=@id";
                 SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.Add(new SqlParameter("@id", id));
                 cmd_SQL.Parameters.AddWithValue("@Prize", prize);
                 cmd_SQL.ExecuteNonQuery();
             }

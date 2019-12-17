@@ -52,8 +52,9 @@ namespace BusCompany.DAO
         public Bus GetById(string id)
         {
             Connect(); Bus bus = new Bus();
-            string query = "SELECT*FROM Bus where numberPlate='" + id+"'";
+            string query = "SELECT*FROM Bus where numberPlate='@id'";
             SqlCommand commandRead = new SqlCommand(query, Connection);
+            commandRead.Parameters.AddWithValue("@id", id);
             SqlDataReader reader = commandRead.ExecuteReader();
             if (reader.HasRows)
             {
@@ -116,8 +117,9 @@ namespace BusCompany.DAO
             Connect();
             try
             {
-                string sql = "DELETE FROM Service WHERE idBus='" + id + "';";
+                string sql = "DELETE FROM Service WHERE idBus='@id';";
                 SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.AddWithValue("@id", id);
                 cmd_SQL.ExecuteNonQuery();
             }
             catch (SqlException e)
@@ -135,8 +137,9 @@ namespace BusCompany.DAO
                 Connect();
                 try
                 {
-                    string sql = "DELETE FROM Bus WHERE numberPlate='" + id + "';";
+                    string sql = "DELETE FROM Bus WHERE numberPlate='@id';";
                     SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                    cmd_SQL.Parameters.AddWithValue("@id", id);
                     cmd_SQL.ExecuteNonQuery();
                 }
                 catch (SqlException e)
@@ -160,8 +163,9 @@ namespace BusCompany.DAO
 
             try
             {
-                string sql = "UPDATE Bus SET mileage=@Mileage, TechnicalStatus=@Status where numberPlate='" + id + "'";
+                string sql = "UPDATE Bus SET mileage=@Mileage, TechnicalStatus=@Status where numberPlate='@id'";
                 SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.AddWithValue("@id", id);
                 cmd_SQL.Parameters.AddWithValue("@Mileage", bus.Mileage);
                 cmd_SQL.Parameters.AddWithValue("@Status", bus.Status);
                 cmd_SQL.ExecuteNonQuery();

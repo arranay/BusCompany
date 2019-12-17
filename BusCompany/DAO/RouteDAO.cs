@@ -51,8 +51,9 @@ namespace BusCompany.DAO
         public Route GetById(int id)
         {
             Connect(); Route route= new Route();
-            string query = "SELECT*FROM Route where id=" + id;
+            string query = "SELECT*FROM Route where id=@id";
             SqlCommand commandRead = new SqlCommand(query, Connection);
+            commandRead.Parameters.AddWithValue("@id", id);
             SqlDataReader reader = commandRead.ExecuteReader();
             try
             {
@@ -89,9 +90,10 @@ namespace BusCompany.DAO
 
             List<Hult> hultlList = new List<Hult>();
             string query = "SELECT*FROM RoteHult INNER JOIN Hult " +
-                "ON Hult.id=RoteHult.Id_Hult where Id_Route=" + id + "  ORDER BY RoteHult.routeNumber ASC;";
+                "ON Hult.id=RoteHult.Id_Hult where Id_Route=@id  ORDER BY RoteHult.routeNumber ASC;";
 
             SqlCommand commandRead = new SqlCommand(query, Connection);
+            commandRead.Parameters.AddWithValue("@id", id);
             SqlDataReader reader = commandRead.ExecuteReader();
             try
             {
@@ -128,8 +130,9 @@ namespace BusCompany.DAO
             Connect();
             try
             {
-                string sql = "DELETE FROM RoteHult WHERE Id_Route =" + id + "; DELETE FROM Route WHERE Id =" + id;
+                string sql = "DELETE FROM RoteHult WHERE Id_Route =@id; DELETE FROM Route WHERE Id =@id";
                 SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.AddWithValue("@id", id);
                 cmd_SQL.ExecuteNonQuery();
             }
             catch (SqlException e)
@@ -178,8 +181,9 @@ namespace BusCompany.DAO
             try
             {
                 Connect();
-                string query = "Select COUNT(*) From Waybil WHERE routeId=" + id;
+                string query = "Select COUNT(*) From Waybil WHERE routeId=@id";
                 SqlCommand commandRead = new SqlCommand(query, Connection);
+                commandRead.Parameters.AddWithValue("@id", id);
                 commandRead.ExecuteNonQuery();
                 int count = Convert.ToInt32(commandRead.ExecuteScalar());
                 if (count > 0) return false;
@@ -198,8 +202,9 @@ namespace BusCompany.DAO
             try
             {
                 Connect();
-                string sql = "UPDATE Route SET approvedStatus=@approvedStatus WHERE id=" + id;
+                string sql = "UPDATE Route SET approvedStatus=@approvedStatus WHERE id=@id";
                 SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.AddWithValue("@id", id);
                 cmd_SQL.Parameters.AddWithValue("@approvedStatus", status);
                 cmd_SQL.ExecuteNonQuery();
             }
@@ -252,8 +257,9 @@ namespace BusCompany.DAO
                         try
                         {
                             Connect();
-                            string sql = "UPDATE Route SET numberOfHult=@numberOfHult WHERE id=" + id;
+                            string sql = "UPDATE Route SET numberOfHult=@numberOfHult WHERE id=@id";
                             SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                            cmd_SQL.Parameters.AddWithValue("@id", id);
                             cmd_SQL.Parameters.AddWithValue("@numberOfHult", count+1);
                             cmd_SQL.ExecuteNonQuery();
                         }
@@ -324,8 +330,9 @@ namespace BusCompany.DAO
             try
             {
                 Connect();
-                string query = "Select COUNT(*) From RoteHult WHERE id_route=" + id;
+                string query = "Select COUNT(*) From RoteHult WHERE id_route=@id";
                 SqlCommand commandRead = new SqlCommand(query, Connection);
+                commandRead.Parameters.AddWithValue("@id", id);
                 commandRead.ExecuteNonQuery();
                 count = Convert.ToInt32(commandRead.ExecuteScalar());
             }
@@ -344,8 +351,9 @@ namespace BusCompany.DAO
                 try
                 {
                     Connect();
-                    string query = "UPDATE Route SET numberOfHult=@numberOfHult WHERE id=" + id;
+                    string query = "UPDATE Route SET numberOfHult=@numberOfHult WHERE id=@id";
                     SqlCommand cmd_SQL = new SqlCommand(query, Connection);
+                    cmd_SQL.Parameters.AddWithValue("@id", id);
                     cmd_SQL.Parameters.AddWithValue("@numberOfHult", count);
                     cmd_SQL.ExecuteNonQuery();
 

@@ -52,8 +52,9 @@ namespace BusCompany.DAO
         public Service GetById(int id)
         {
             Connect(); Service service = new Service();
-            string query = "SELECT*FROM Service where id=" + id;
+            string query = "SELECT*FROM Service where id=@id";
             SqlCommand commandRead = new SqlCommand(query, Connection);
+            commandRead.Parameters.AddWithValue("@id", id);
             SqlDataReader reader = commandRead.ExecuteReader();
             if (reader.HasRows)
             {
@@ -84,8 +85,9 @@ namespace BusCompany.DAO
             Connect();
             try
             {
-                string sql = "DELETE FROM Service WHERE Id =" + id;
+                string sql = "DELETE FROM Service WHERE Id =@id";
                 SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.AddWithValue("@id", id);
                 cmd_SQL.ExecuteNonQuery();
             }
             catch (SqlException e)
@@ -198,8 +200,9 @@ namespace BusCompany.DAO
 
             try
             {
-                string sql = "UPDATE Service SET typeOfWork=@typeOfWork WHERE id=" + id;
+                string sql = "UPDATE Service SET typeOfWork=@typeOfWork WHERE id=@id";
                 SqlCommand cmd_SQL = new SqlCommand(sql, Connection);
+                cmd_SQL.Parameters.AddWithValue("@id", id);
                 cmd_SQL.Parameters.AddWithValue("@typeOfWork", service.TypeOfWork);
                 cmd_SQL.ExecuteNonQuery();
             }
